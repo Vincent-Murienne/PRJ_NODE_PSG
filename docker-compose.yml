@@ -1,0 +1,18 @@
+services:
+  server:
+    image: node:22
+    ports:
+      - 8080:8080
+    volumes:
+      - ./server:/app
+    tty: true
+  sql:
+    image: mysql:9
+    ports:
+      - 3306:3306
+    volumes:
+      - ./server/sql:/app
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always

@@ -1,0 +1,6 @@
+{
+    "name": "SQL",
+    "dockerComposeFile": "../../docker-compose.yml",
+    "service": "sql",
+    "workspaceFolder": "/app"
+}

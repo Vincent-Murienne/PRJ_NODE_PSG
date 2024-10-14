@@ -1,0 +1,11 @@
+{
+    "name": "Server",
+    "dockerComposeFile": "../../docker-compose.yml",
+    "service": "server",
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [ "christian-kohler.npm-intellisense" ]
+        }
+    }
+}
