@@ -32,11 +32,11 @@ USE `prj_node_psg`;
 
 CREATE TABLE `actualite` (
   `id_actualite` int(11) NOT NULL,
-  `titre` varchar(100) DEFAULT NULL,
+  `titre` varchar(255) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `texte_long` varchar(255) DEFAULT NULL,
   `resume` varchar(255) DEFAULT NULL,
-  `image` varchar(100) DEFAULT NULL
+  `image` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -55,7 +55,7 @@ INSERT INTO `actualite` (`id_actualite`, `titre`, `date`, `texte_long`, `resume`
 
 CREATE TABLE `adversaire` (
   `id_adversaire` int(11) NOT NULL,
-  `nom_adversaire` varchar(100) NOT NULL
+  `nom_adversaire` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -102,7 +102,7 @@ INSERT INTO `club` (`id_club`, `presentation`, `histoire`) VALUES
 CREATE TABLE `duel` (
   `id_match` int(11) NOT NULL,
   `date_match` date NOT NULL,
-  `lieu_match` varchar(100) NOT NULL,
+  `lieu_match` varchar(255) NOT NULL,
   `id_adversaire` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -145,8 +145,8 @@ INSERT INTO `matchscore` (`id_matchScore`, `id_match`, `score_equipe`, `score_ad
 
 CREATE TABLE `partenaire` (
   `id_partenaire` int(11) NOT NULL,
-  `logo` varchar(100) DEFAULT NULL,
-  `url` varchar(100) DEFAULT NULL
+  `logo` varchar(255) DEFAULT NULL,
+  `url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -185,7 +185,7 @@ INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 
 CREATE TABLE `section` (
   `id_section` int(11) NOT NULL,
-  `nom_section` varchar(100) NOT NULL
+  `nom_section` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -206,7 +206,7 @@ INSERT INTO `section` (`id_section`, `nom_section`) VALUES
 
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
-  `full_name` varchar(100) NOT NULL,
+  `full_name` varchar(255) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `isActive` tinyint(1) DEFAULT 0,
