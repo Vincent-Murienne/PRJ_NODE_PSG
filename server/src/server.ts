@@ -4,6 +4,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import clubRoutes from './routes/clubRoutes';
 import partenaireRoutes from './routes/partenaireRoutes';
+import actualiteRoutes from './routes/actualiteRoutes';
+import adversaireRoutes from './routes/adversaireRoutes';
+import duelRoutes from './routes/duelRoutes';
 
 // Charger les variables d'environnement
 dotenv.config();
@@ -24,6 +27,9 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/', clubRoutes);
 app.use('/api/', partenaireRoutes);
+app.use('/api/', actualiteRoutes);
+app.use('/api/', adversaireRoutes);
+app.use('/api/', duelRoutes);
 
 // Démarrer le serveur
 app.listen(port, () => {
