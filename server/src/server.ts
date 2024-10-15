@@ -2,11 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
-import { clubRoutes } from './routes/club';
-import { newsRoutes } from './routes/news';
-import { partnerRoutes } from './routes/partner';
-import { matchRoutes } from './routes/match';
-import { userRoutes } from './routes/user';
+import clubRoutes from './routes/clubRoutes';
+import partenaireRoutes from './routes/partenaireRoutes';
 
 // Charger les variables d'environnement
 dotenv.config();
@@ -25,11 +22,8 @@ app.get('/', (req, res) => {
 });
 
 // Routes
-app.use('/api/club', clubRoutes);
-app.use('/api/news', newsRoutes);
-app.use('/api/partners', partnerRoutes);
-app.use('/api/matches', matchRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/', clubRoutes);
+app.use('/api/', partenaireRoutes);
 
 // Démarrer le serveur
 app.listen(port, () => {
