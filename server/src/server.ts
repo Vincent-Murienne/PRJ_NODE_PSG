@@ -7,6 +7,8 @@ import partenaireRoutes from './routes/partenaireRoutes';
 import actualiteRoutes from './routes/actualiteRoutes';
 import adversaireRoutes from './routes/adversaireRoutes';
 import duelRoutes from './routes/duelRoutes';
+import userRoutes from './routes/userRoute';
+import authRoutes from './routes/authRoutes';
 
 // Charger les variables d'environnement
 dotenv.config();
@@ -30,6 +32,8 @@ app.use('/api/', partenaireRoutes);
 app.use('/api/', actualiteRoutes);
 app.use('/api/', adversaireRoutes);
 app.use('/api/', duelRoutes);
+app.use('/api/', userRoutes);
+app.use('/api/', authRoutes);
 
 // Démarrer le serveur
 app.listen(port, () => {
