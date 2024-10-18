@@ -1,19 +1,25 @@
 import { Router } from 'express';
-import { addUser, updateUser, deleteUser, getAllUsers } from '../controllers/userController';
-import { authenticateToken } from '../middlewares/auth';  // Assurez-vous que le chemin est correct
+import { addUser, updateUser, deleteUser, getAllUsersWithRoles, getUserByIdWithRole, activateUser } from '../controllers/userController';
+import { authorizeRole, authenticateToken } from '../middlewares/auth';
 
 const router = Router();
 
-// Route protégée pour récupérer tous les utilisateurs
-router.get('/users', authenticateToken, getAllUsers);
+// Route pour récupérer tous les utilisateurs
+router.get('/users', authenticateToken, getAllUsersWithRoles);
 
-// Route protégée pour ajouter un nouvel utilisateur
-router.post('/users', authenticateToken, addUser);
+// Route pour récupérer un utilisateur
+router.get('/users/:id_user', authenticateToken, getUserByIdWithRole);
 
-// Route protégée pour mettre à jour un utilisateur
-router.put('/users/:id', authenticateToken, updateUser);
+// Route pour ajouter un nouvel utilisateur
+router.post('/register', addUser);
 
-// Route protégée pour supprimer un utilisateur
-router.delete('/users/:id', authenticateToken, deleteUser);
+// Route pour mettre à jour un utilisateur
+router.put('/users/:id_user', authenticateToken, authorizeRole([1]), updateUser);
+
+// Route pour activer un compte via un compte administrateur
+router.put('/users/:id_user/activate', authenticateToken, authorizeRole([1]), activateUser);
+
+// Route pour supprimer un utilisateur
+router.delete('/users/:id_user', authenticateToken, authorizeRole([1]), deleteUser);
 
 export default router;

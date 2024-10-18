@@ -1,0 +1,1051 @@
+{
+	"info": {
+		"_postman_id": "568e1e32-795b-4f59-8219-4189a7f071f2",
+		"name": "prj_node_psg",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23787471"
+	},
+	"item": [
+		{
+			"name": "Club",
+			"item": [
+				{
+					"name": "Get all club",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/clubs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clubs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update presentation",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI1OTkxNCwiZXhwIjoxNzI5MjYyOTE0fQ.YmcjnjWHonmvsPFwzh9eAoi0fR4M-vSpDigXaMMj8_c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"presentation\": \"Histoire du club de Paris.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clubs/1/presentation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clubs",
+								"1",
+								"presentation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update club",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI1OTkxNCwiZXhwIjoxNzI5MjYyOTE0fQ.YmcjnjWHonmvsPFwzh9eAoi0fR4M-vSpDigXaMMj8_c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"presentation\": \"Histoire du club de Paris\",\r\n    \"histoire\": \"Paris ...\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/clubs/1/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"clubs",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Partenaire",
+			"item": [
+				{
+					"name": "Get all partenaires",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partenaires",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partenaires"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter partenaire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI1OTkxNCwiZXhwIjoxNzI5MjYyOTE0fQ.YmcjnjWHonmvsPFwzh9eAoi0fR4M-vSpDigXaMMj8_c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"logo\": \"https://static.wikia.nocookie.net/onepiece/images/6/6d/Monkey_D._Luffy_Anime_Post_Timeskip_Infobox.png/revision/latest?cb=20240306200817\",\r\n    \"url\" : \"https://onepiece.fandom.com/wiki/Monkey_D._Luffy\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/partenaires",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partenaires"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update partenaire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI1OTkxNCwiZXhwIjoxNzI5MjYyOTE0fQ.YmcjnjWHonmvsPFwzh9eAoi0fR4M-vSpDigXaMMj8_c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"logo\": \"https://static.wikia.nocoo\",\r\n    \"url\": \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/partenaires/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partenaires",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer partenaire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI1OTkxNCwiZXhwIjoxNzI5MjYyOTE0fQ.YmcjnjWHonmvsPFwzh9eAoi0fR4M-vSpDigXaMMj8_c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/partenaires/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partenaires",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get un partenaire",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/partenaires/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"partenaires",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Actualite",
+			"item": [
+				{
+					"name": "Get all actualite",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/actualites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actualites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter actualite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6MiwiaWF0IjoxNzI5MjYwMjA2LCJleHAiOjE3MjkyNjMyMDZ9.9Zk_rKBUxyxtppLVx_eB_Pjg9UTUvpI5daETEYMueTU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titre\": \"Nouvelle actualité\",\r\n    \"texte_long\": \"Ceci est un texte long pour l'actualité.\",\r\n    \"resume\": \"Résumé de l'actualité.\",\r\n    \"image\": \"chemin/vers/image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/actualites",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actualites"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update actualite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsImVtYWlsIjoiYWRtaW5AZ21haWwuY29tIiwicm9sZSI6MiwiaWF0IjoxNzI5MjYwMjA2LCJleHAiOjE3MjkyNjMyMDZ9.9Zk_rKBUxyxtppLVx_eB_Pjg9UTUvpI5daETEYMueTU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titre\": \"Nouvelle actualité\",\r\n    \"texte_long\": \"Ceci est un texte long pour l'actualité.\",\r\n    \"resume\": \"Résumé de l'actualité...\",\r\n    \"image\": \"chemin/vers/image.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/actualites/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actualites",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supprimer actualite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MDM1NywiZXhwIjoxNzI5MjYzMzU3fQ.ArNKtPYMJbVVsE_Z68GoUfQxZcU_jD-88qaJAMsQS_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/actualites/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actualites",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get une actualité",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/actualites/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"actualites",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Adversaire",
+			"item": [
+				{
+					"name": "Get all adversaire",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/adversaires",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"adversaires"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter adversaire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MDM1NywiZXhwIjoxNzI5MjYzMzU3fQ.ArNKtPYMJbVVsE_Z68GoUfQxZcU_jD-88qaJAMsQS_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom_adversaire\": \"Nom de l'adversaire\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/adversaires",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"adversaires"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete adversaire",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MDM1NywiZXhwIjoxNzI5MjYzMzU3fQ.ArNKtPYMJbVVsE_Z68GoUfQxZcU_jD-88qaJAMsQS_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/adversaires/11",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"adversaires",
+								"11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get un adversaire",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/adversaires/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"adversaires",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Match",
+			"item": [
+				{
+					"name": "Get all duel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/duels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ajouter duel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MDM1NywiZXhwIjoxNzI5MjYzMzU3fQ.ArNKtPYMJbVVsE_Z68GoUfQxZcU_jD-88qaJAMsQS_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"date_match\": \"2024-10-12\",\r\n        \"lieu_match\": \"Stade Olympique\",\r\n        \"id_adversaire\": \"3\",\r\n        \"id_section\": \"2\",\r\n        \"score_equipe\": 3,\r\n        \"score_adversaire\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/duels",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update duel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MDM1NywiZXhwIjoxNzI5MjYzMzU3fQ.ArNKtPYMJbVVsE_Z68GoUfQxZcU_jD-88qaJAMsQS_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"date_match\": \"2024-11-15\",\r\n    \"lieu_match\": \"Stade Olympique\",\r\n    \"id_adversaire\": \"3\",\r\n    \"id_section\": \"1\",\r\n    \"score_equipe\": 3,\r\n    \"score_adversaire\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/duels/17",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels",
+								"17"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get un duel avec score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/duels/17/score",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels",
+								"17",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get calendrier duel",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/duels/2/calendrier",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels",
+								"2",
+								"calendrier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update score",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MzM3NSwiZXhwIjoxNzI5MjY2Mzc1fQ.6JF3SENK8i7qIKNyJuQfOUoqn76HJXurUhbfHwXO57s",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"score_equipe\": 3,\r\n    \"score_adversaire\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/duels/19/score",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels",
+								"19",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete duel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MDM1NywiZXhwIjoxNzI5MjYzMzU3fQ.ArNKtPYMJbVVsE_Z68GoUfQxZcU_jD-88qaJAMsQS_A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/duels/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all duel avec score",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/duels/score",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"duels",
+								"score"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MjAwMSwiZXhwIjoxNzI5MjY1MDAxfQ.uyh3jhnDKIf_sysDCGlhkhiX2fS-cEy1sm7b50iwwHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI0NDQ4NSwiZXhwIjoxNzI5MjQ3NDg1fQ.oiF-AJGOzyZm1RQLCNOv9i-h7USfNHGuQW592Fm_Z_w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Vincent\",\r\n    \"email\": \"test@gmail.com\",\r\n    \"password\": \"Tinquiete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImVtYWlsIjoiam9obi5kb2VAZXhhbXBsZS5jb20iLCJyb2xlIjoyLCJpYXQiOjE3MjkyMDE3MTAsImV4cCI6MTcyOTIwMTc0MH0.yeQwa3fAJkIBVLidaVNV4xWUd6TjYsFTESmwnYepzsY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"adm@gmail.com\",\r\n    \"password\": \"Admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MjAwMSwiZXhwIjoxNzI5MjY1MDAxfQ.uyh3jhnDKIf_sysDCGlhkhiX2fS-cEy1sm7b50iwwHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Vincent\",\r\n    \"email\": \"muriennevincent@gmail.com\",\r\n    \"password\": \"Tinquiete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get un user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MjAwMSwiZXhwIjoxNzI5MjY1MDAxfQ.uyh3jhnDKIf_sysDCGlhkhiX2fS-cEy1sm7b50iwwHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/12",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"12"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MjAwMSwiZXhwIjoxNzI5MjY1MDAxfQ.uyh3jhnDKIf_sysDCGlhkhiX2fS-cEy1sm7b50iwwHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTYsImVtYWlsIjoiYWRtQGdtYWlsLmNvbSIsInJvbGUiOjEsImlhdCI6MTcyOTI2MjAwMSwiZXhwIjoxNzI5MjY1MDAxfQ.uyh3jhnDKIf_sysDCGlhkhiX2fS-cEy1sm7b50iwwHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/users/12/activate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"12",
+								"activate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

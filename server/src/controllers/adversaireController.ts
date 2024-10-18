@@ -13,6 +13,18 @@ export const getAllAdversaires = async (req: Request, res: Response): Promise<vo
     }
 };
 
+// Récupérer un adversaire
+export const getAdversaireByID = async (req: Request, res: Response): Promise<void> => {
+    const id_adversaire = req.params.id_adversaire;
+    try {
+        const [adversaire] = await db.query<RowDataPacket[]>('SELECT * FROM adversaire WHERE id_adversaire = ?', [id_adversaire]);
+        res.status(200).json(adversaire);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erreur lors de la récupération de l\'adversaire.' });
+    }
+};
+
 // Ajouter un nouvel adversaire
 export const addAdversaire = async (req: Request, res: Response): Promise<void> => {
     const { nom_adversaire } = req.body;
@@ -33,7 +45,7 @@ export const addAdversaire = async (req: Request, res: Response): Promise<void> 
 
 // Supprimer un adversaire
 export const deleteAdversaire = async (req: Request, res: Response): Promise<void> => {
-    const adversaireId = req.params.id;
+    const adversaireId = req.params.id_adversaire;
 
     try {
         const [result] = await db.query<ResultSetHeader>('DELETE FROM adversaire WHERE id_adversaire = ?', [adversaireId]);

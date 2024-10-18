@@ -13,20 +13,35 @@ export const getAllActualites = async (req: Request, res: Response): Promise<voi
     }
 };
 
+// Récupérer une seule actualité
+export const getActualiteByID = async (req: Request, res: Response): Promise<void> => {
+    const id_actualite = req.params.id_actualite;
+    try {
+        const [actualite] = await db.query<RowDataPacket[]>('SELECT * FROM actualite WHERE id_actualite = ?', [id_actualite]);
+        res.status(200).json(actualite);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur lors de la récupération de l\'actualité." });
+    }
+};
+
 // Ajouter une nouvelle actualité
 export const addActualite = async (req: Request, res: Response): Promise<void> => {
-    const { titre, texte_long, resume, image, date } = req.body;
+    const { titre, texte_long, resume, image } = req.body;
 
-    if (!titre || !texte_long || !resume || !date) {
-        res.status(400).json({ message: 'Les champs titre, texte_long, résumé et date sont obligatoires.' });
+    if (!titre || !texte_long || !resume || !image) {
+        res.status(400).json({ message: 'Les champs titre, texte_long, résumé et image sont obligatoires.' });
         return;
     }
+
+    const currentDate = new Date();
 
     try {
         const [result] = await db.query<ResultSetHeader>(
             'INSERT INTO actualite (titre, texte_long, resume, image, date) VALUES (?, ?, ?, ?, ?)', 
-            [titre, texte_long, resume, image, date]
+            [titre, texte_long, resume, image, currentDate]
         );
+
         res.status(201).json({ message: 'Actualité ajoutée avec succès.', id_actualite: result.insertId });
     } catch (error) {
         console.error(error);
@@ -36,18 +51,20 @@ export const addActualite = async (req: Request, res: Response): Promise<void> =
 
 // Mettre à jour une actualité
 export const updateActualite = async (req: Request, res: Response): Promise<void> => {
-    const actualiteId = req.params.id;
-    const { titre, texte_long, resume, image, date } = req.body;
+    const actualiteId = req.params.id_actualite;
+    const { titre, texte_long, resume, image } = req.body;
 
-    if (!titre && !texte_long && !resume && !image && !date) {
+    if (!titre && !texte_long && !resume && !image) {
         res.status(400).json({ message: 'Au moins un champ doit être mis à jour.' });
         return;
     }
 
+    const currentDate = new Date();
+
     try {
         const [result] = await db.query<ResultSetHeader>(
             'UPDATE actualite SET titre = ?, texte_long = ?, resume = ?, image = ?, date = ? WHERE id_actualite = ?', 
-            [titre, texte_long, resume, image, date, actualiteId]
+            [titre, texte_long, resume, image, currentDate, actualiteId]
         );
 
         if (result.affectedRows > 0) {
@@ -63,7 +80,7 @@ export const updateActualite = async (req: Request, res: Response): Promise<void
 
 // Supprimer une actualité
 export const deleteActualite = async (req: Request, res: Response): Promise<void> => {
-    const actualiteId = req.params.id;
+    const actualiteId = req.params.id_actualite;
 
     try {
         const [result] = await db.query<ResultSetHeader>('DELETE FROM actualite WHERE id_actualite = ?', [actualiteId]);

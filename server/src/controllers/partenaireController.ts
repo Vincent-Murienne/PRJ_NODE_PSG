@@ -13,6 +13,18 @@ export const getAllPartenaires = async (req: Request, res: Response): Promise<vo
     }
 };
 
+// Récupérer un partenaire
+export const getPartenaireByID = async (req: Request, res: Response): Promise<void> => {
+    const id_partenaire = req.params.id_partenaire;
+    try {
+        const [partenaire] = await db.query<RowDataPacket[]>('SELECT * FROM partenaire WHERE id_partenaire = ?', [id_partenaire]);
+        res.status(200).json(partenaire);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erreur lors de la récupération du partenaire.' });
+    }
+};
+
 // Ajouter un nouveau partenaire
 export const addPartenaire = async (req: Request, res: Response): Promise<void> => {
     const { logo, url } = req.body;
@@ -33,7 +45,7 @@ export const addPartenaire = async (req: Request, res: Response): Promise<void> 
 
 // Mettre à jour un partenaire
 export const updatePartenaire = async (req: Request, res: Response): Promise<void> => {
-    const partenaireId = req.params.id;
+    const partenaireId = req.params.id_partenaire;
     const { logo, url } = req.body;
 
     if (!logo && !url) {
@@ -42,7 +54,10 @@ export const updatePartenaire = async (req: Request, res: Response): Promise<voi
     }
 
     try {
-        const [result] = await db.query<ResultSetHeader>('UPDATE partenaire SET logo = ?, url = ? WHERE id = ?', [logo, url, partenaireId]);
+        const [result] = await db.query<ResultSetHeader>(
+            'UPDATE partenaire SET logo = ?, url = ? WHERE id_partenaire = ?', 
+            [logo, url, partenaireId]
+        );
 
         if (result.affectedRows > 0) {
             res.status(200).json({ message: 'Partenaire mis à jour avec succès.' });
@@ -55,12 +70,13 @@ export const updatePartenaire = async (req: Request, res: Response): Promise<voi
     }
 };
 
+
 // Supprimer un partenaire
 export const deletePartenaire = async (req: Request, res: Response): Promise<void> => {
-    const partenaireId = req.params.id;
+    const partenaireId = req.params.id_partenaire;
 
     try {
-        const [result] = await db.query<ResultSetHeader>('DELETE FROM partenaire WHERE id = ?', [partenaireId]);
+        const [result] = await db.query<ResultSetHeader>('DELETE FROM partenaire WHERE id_partenaire = ?', [partenaireId]);
 
         if (result.affectedRows > 0) {
             res.status(200).json({ message: 'Partenaire supprimé avec succès.' });

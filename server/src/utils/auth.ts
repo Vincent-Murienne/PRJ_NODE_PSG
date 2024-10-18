@@ -3,8 +3,8 @@ import argon2 from 'argon2';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-export const generateToken = (userId: number, role: string): string => {
-    return jwt.sign({ userId, role }, JWT_SECRET, { expiresIn: '30s' });
+export const generateToken = (id_user: number, id_role: string): string => {
+    return jwt.sign({ id_user, id_role }, JWT_SECRET, { expiresIn: '3000s' });
 };
 
 export const verifyToken = (token: string): any => {

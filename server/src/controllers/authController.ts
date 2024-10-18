@@ -41,12 +41,18 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
             return;
         }
 
+        if (!user.isActive) {
+            res.status(403).json({ message: 'Votre compte n\'est pas encore activé.' });
+            return;
+        }        
+
         // Créer un JWT pour l'utilisateur
         const token = jwt.sign(
             { id: user.id_user, email: user.email, role: user.id_role },
             JWT_SECRET,
             { expiresIn: JWT_EXPIRATION }
         );
+
 
         // Crypter le mot de passe avec SimpleCrypto
         const encryptedPassword = simpleCrypto.encrypt(password);

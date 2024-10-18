@@ -103,39 +103,40 @@ CREATE TABLE `duel` (
   `id_match` int(11) NOT NULL,
   `date_match` date NOT NULL,
   `lieu_match` varchar(255) NOT NULL,
-  `id_adversaire` int(11) NOT NULL
+  `id_adversaire` int(11) NOT NULL,
+  `id_section` int(11) NOT NULL,
+  `id_matchScore` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `duel`
 --
 
-INSERT INTO `duel` (`id_match`, `date_match`, `lieu_match`, `id_adversaire`) VALUES
-(8, '2024-10-01', 'Stade de France', 1),
-(9, '2024-10-08', 'Parc des Princes', 2),
-(10, '2024-10-15', 'Allianz Riviera', 3);
+INSERT INTO `duel` (`id_match`, `date_match`, `lieu_match`, `id_adversaire`, `id_section`, `id_matchScore`) VALUES
+(8, '2024-10-01', 'Stade de France', 1, 1, 1),
+(9, '2024-10-08', 'Parc des Princes', 2, 2, 2),
+(10, '2024-10-15', 'Allianz Riviera', 3, 3, 3);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `matchscore`
+-- Structure de la table `matchScore`
 --
 
-CREATE TABLE `matchscore` (
+CREATE TABLE `matchScore` (
   `id_matchScore` int(11) NOT NULL,
-  `id_match` int(11) NOT NULL,
   `score_equipe` int(11) NOT NULL,
   `score_adversaire` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `matchscore`
+-- Déchargement des données de la table `matchScore`
 --
 
-INSERT INTO `matchscore` (`id_matchScore`, `id_match`, `score_equipe`, `score_adversaire`) VALUES
-(18, 8, 3, 1),
-(19, 9, 2, 2),
-(20, 10, 1, 0);
+INSERT INTO `matchScore` (`id_matchScore`, `score_equipe`, `score_adversaire`) VALUES
+(18, 3, 1),
+(19, 2, 2),
+(20, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -218,9 +219,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `full_name`, `email`, `password`, `isActive`, `id_role`) VALUES
-(9, 'Jean Dupont', 'jean.dupont@example.com', 'password123', 1, 1),
-(10, 'Marie Curie', 'marie.curie@example.com', 'password123', 1, 2),
-(11, 'Paul Martin', 'paul.martin@example.com', 'password123', 0, 2);
+(1, 'Adm', 'adm@gmail.com', 'Admin123', 1, 1);
 
 --
 -- Index pour les tables déchargées
@@ -250,13 +249,14 @@ ALTER TABLE `club`
 ALTER TABLE `duel`
   ADD PRIMARY KEY (`id_match`),
   ADD KEY `id_adversaire` (`id_adversaire`);
+  ADD KEY `id_section` (`id_section`);
+  ADD KEY `id_matchScore` (`id_matchScore`);
 
 --
--- Index pour la table `matchscore`
+-- Index pour la table `matchScore`
 --
-ALTER TABLE `matchscore`
-  ADD PRIMARY KEY (`id_matchScore`),
-  ADD KEY `id_match` (`id_match`);
+ALTER TABLE `matchScore`
+  ADD PRIMARY KEY (`id_matchScore`);
 
 --
 -- Index pour la table `partenaire`
@@ -313,9 +313,9 @@ ALTER TABLE `duel`
   MODIFY `id_match` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT pour la table `matchscore`
+-- AUTO_INCREMENT pour la table `matchScore`
 --
-ALTER TABLE `matchscore`
+ALTER TABLE `matchScore`
   MODIFY `id_matchScore` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
@@ -352,11 +352,13 @@ ALTER TABLE `user`
 ALTER TABLE `duel`
   ADD CONSTRAINT `duel_ibfk_1` FOREIGN KEY (`id_adversaire`) REFERENCES `adversaire` (`id_adversaire`);
 
---
--- Contraintes pour la table `matchscore`
---
-ALTER TABLE `matchscore`
-  ADD CONSTRAINT `matchscore_ibfk_1` FOREIGN KEY (`id_match`) REFERENCES `match` (`id_match`);
+ALTER TABLE `duel`
+  ADD CONSTRAINT `fk_section` FOREIGN KEY (id_section) REFERENCES `section` (`id_section`);
+
+ALTER TABLE `duel`
+  ADD CONSTRAINT `fk_matchScore` 
+  FOREIGN KEY (`id_matchScore`) REFERENCES `matchScore` (`id_matchScore`)
+  ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `user`

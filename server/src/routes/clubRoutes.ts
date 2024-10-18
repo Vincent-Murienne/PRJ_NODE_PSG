@@ -1,11 +1,16 @@
 import { Router } from 'express';
-import { updatePresentation, getAllClubs  } from '../controllers/clubController'; // Assure-toi que le chemin est correct
+import { updateClubDetails, getAllClubs, updateClubPresentation } from '../controllers/clubController';
+import { authorizeRole, authenticateToken } from '../middlewares/auth';
 
 const router = Router();
 
-// Route pour mettre à jour la colonne présentation du club
-router.put('/clubs/:id/presentation', updatePresentation);
-
+// Route pour récupérer les informations du club
 router.get('/clubs', getAllClubs);
+
+// Route pour mettre à jour la présentation et l'histoire du club
+router.put('/clubs/:id_club', authenticateToken, authorizeRole([1]), updateClubDetails);
+
+// Route pour mettre à jour uniquement la présentation du club
+router.put('/clubs/:id_club/presentation', authenticateToken, authorizeRole([1]), updateClubPresentation);
 
 export default router;
