@@ -1,36 +1,67 @@
 # PRJ_NODE_PSG
 
+## Lancement du projet
 
-**Lancement du projet :** 
+### Étapes pour démarrer le projet
 
-- Étapes pour démarrer le projet
+- Construire et démarrer le projet avec Docker :
+```bash
+docker-compose up --build
+```
+(Construire le projet)
 
-docker-compose up --build (builder le projet)
-docker-compose up -d (mode détaché --> accès au terminal)
+- Démarrer le projet en mode détaché :
+```bash
+docker-compose up -d
+```
+(Mode détaché --> permet de libérer le terminal)
 
-- Pour accèder au conteneur SQL, se connecter à la base de données : :
-mysql -u root -p prj_node_psg (accès à la base de donnée root --> mdp = root)
+### Accéder au conteneur SQL
+
+- Se connecter à la base de données MySQL :
+```bash
+mysql -u root -p prj_node_psg
+```
+(Le mot de passe pour l'utilisateur root est root)
 
 - Charger le fichier SQL source dans la base de données :
-source prj_node_psg.sql (pour ajouter le fichier source à la base de donnée)
+```bash
+source prj_node_psg.sql
+```
+(Importer le fichier source dans la base de données)
 
-**Commandes utiles MySQL**
+## Commandes utiles MySQL
+
 - Afficher toutes les bases de données disponibles :
-show databases; (afficher toutes les tables)
-show tables; (Afficher les colonnes d'une table spécifique de ma base prj_node_psg)
-show columns from <nom_table> (afficher les colonnes d'une table en particulier)
+```sql
+show databases;
+```
 
-**Étapes à suivre pour la gestion des comptes: **
-- Avoir un compte Administrateur :
+- Afficher les tables de la base de données prj_node_psg :
+```sql
+show tables;
+```
+
+- Afficher les colonnes d'une table spécifique :
+```sql
+show columns from <nom_table>;
+```
+
+## Étapes à suivre pour la gestion des comptes
+
+Avoir un compte Administrateur :
+- Créez un compte Administrateur ou utilisez un compte existant.
+
 Se connecter avec le compte Administrateur pour obtenir un token :
-Vous aurez besoin de ce token pour activer les comptes Éditeur. Sans ce token, l'accès aux fonctionnalités de l'éditeur est refusé.
+- Utilisez le compte Administrateur pour obtenir un token.
+- Important : Ce token est requis pour activer les comptes Éditeur. Sans lui, l'accès aux fonctionnalités de l'éditeur est refusé.
 
-- Activation du compte Éditeur :
-Utilisez le token de l'Administrateur pour activer le compte de l'Éditeur.
+Activation du compte Éditeur :
+- Utilisez le token de l'Administrateur pour activer le compte Éditeur.
 
-- Connexion de l'Éditeur activé :
-Une fois son compte activé, l'Éditeur peut se connecter de la même manière qu'un Administrateur.
+Connexion de l'Éditeur activé :
+- Une fois activé, l'Éditeur peut se connecter de la même manière qu'un Administrateur.
 
-- Accès de l'Éditeur aux routes autorisées :
-L'Éditeur peut maintenant accéder à certaines routes selon les autorisations qui lui sont accordées.
+Accès aux routes autorisées pour l'Éditeur :
+- L'Éditeur activé pourra accéder à certaines routes en fonction des autorisations qui lui sont accordées.
 
