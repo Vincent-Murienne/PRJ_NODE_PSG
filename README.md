@@ -8,7 +8,6 @@
 ```bash
 docker-compose up --build
 ```
-(Construire le projet)
 
 - Démarrer le projet en mode détaché :
 ```bash
