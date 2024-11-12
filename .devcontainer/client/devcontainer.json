@@ -1,7 +1,7 @@
 {
-    "name": "Server",
+    "name": "Client",
     "dockerComposeFile": "../../docker-compose.yml",
-    "service": "server",
+    "service": "client",
     "workspaceFolder": "/app",
     "customizations": {
         "vscode": {

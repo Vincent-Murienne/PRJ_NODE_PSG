@@ -6,6 +6,13 @@ services:
     volumes:
       - ./server:/app
     tty: true
+  client:
+    image: node:22
+    ports:
+      - 5173:5173
+    volumes:
+      - ./client:/app
+    tty: true
   sql:
     image: mysql:9
     ports:
