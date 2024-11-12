@@ -9,10 +9,10 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/" element={<Accueil />} />
-        {/* Ajoutez d'autres routes ici si nécessaire */}
       </Routes>
     </Router>
   );
 };
 
 export default App;
+
