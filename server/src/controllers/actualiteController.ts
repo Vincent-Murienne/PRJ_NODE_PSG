@@ -18,7 +18,7 @@ export const getActualiteByID = async (req: Request, res: Response): Promise<voi
     const id_actualite = req.params.id_actualite;
     try {
         const [actualite] = await db.query<RowDataPacket[]>('SELECT * FROM actualite WHERE id_actualite = ?', [id_actualite]);
-        res.status(200).json(actualite);
+        res.status(200).json(actualite.shift());
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la récupération de l\'actualité." });

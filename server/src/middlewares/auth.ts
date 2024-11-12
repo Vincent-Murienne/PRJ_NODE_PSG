@@ -23,7 +23,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
         req.user = {
             ...decodedUser,
-            id_role: decodedUser.role
+            role: decodedUser.role
         };
 
         next();
@@ -33,7 +33,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
 
 export const authorizeRole = (role: number[]) => {
     return (req: Request, res: Response, next: NextFunction): void => {
-        const id_role = req.user?.id_role;
+        const id_role = req.user?.role;
         if (!id_role || !role.includes(id_role)) {
             res.status(403).json({ message: 'Accès refusé.' });
             return;

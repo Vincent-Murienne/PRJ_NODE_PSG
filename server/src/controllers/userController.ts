@@ -72,7 +72,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 export const activateUser = async (req: Request, res: Response): Promise<void> => {
     const userId = req.params.id_user;
 
-    if (req.user?.id_role !== 1) {
+    if (req.user?.role !== 1) {
         res.status(403).json({ message: 'Accès refusé. Seuls les administrateurs peuvent activer un utilisateur.' });
         return;
     }
