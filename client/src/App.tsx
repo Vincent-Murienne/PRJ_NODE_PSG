@@ -1,17 +1,12 @@
 import './App.css'
 
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Accueil from './pages/Accueil';
+
+import Router from './service/router';
+import { RouterProvider } from 'react-router-dom';
 
 const App: React.FC = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Accueil />} />
-      </Routes>
-    </Router>
-  );
+  return <RouterProvider router={ new Router().getRouter() } />
 };
 
 export default App;
