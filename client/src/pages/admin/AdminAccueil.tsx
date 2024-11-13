@@ -18,7 +18,7 @@ const AdminPage: React.FC = () => {
         <Link to="/admin/match">
           <button style={buttonStyle}>Gestion des Matchs</button>
         </Link>
-        <Link to="/admin/utilisateur">
+        <Link to="/admin/activation-compte">
           <button style={buttonStyle}>Gestion des Utilisateurs</button>
         </Link>
       </div>
