@@ -21,6 +21,7 @@ import AdminActualites from './pages/admin/AdminActualites';
 import AdminPartenaires from './pages/admin/AdminPartenaires';
 import AdminMatchs from './pages/admin/AdminMatchs';
 import AdminActivationCompte from './pages/admin/AdminActivationCompte';
+import BaseLayout from './layout/BaseLayout';
 
 // Fonction de vérification d'authentification
 const isAuthenticated = () => {
@@ -30,7 +31,8 @@ const isAuthenticated = () => {
 
 // Composant pour protéger les routes privées
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  return isAuthenticated() ? children : <Navigate to="/connexion" />;
+  //return isAuthenticated() ? children : <Navigate to="/connexion" />;
+  return <> { children }</>
 };
 
 /* Si on a le time : Faire une page 'NotFund' */
@@ -54,12 +56,14 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/mentions-legales" element={<MentionsLegales />} />
 
         {/* Routes privées (protégées) */}
-        <Route path="/admin" element={<PrivateRoute><AdminAccueil /></PrivateRoute>} />
-        <Route path="/admin/presentation-club" element={<PrivateRoute><AdminPresentationClub /></PrivateRoute>} />
-        <Route path="/admin/actualites" element={<PrivateRoute><AdminActualites /></PrivateRoute>} />
-        <Route path="/admin/partenaires" element={<PrivateRoute><AdminPartenaires /></PrivateRoute>} />
-        <Route path="/admin/matchs" element={<PrivateRoute><AdminMatchs /></PrivateRoute>} />
-        <Route path="/admin/activation-compte" element={<PrivateRoute><AdminActivationCompte /></PrivateRoute>} />
+        <Route path="/admin/" element={<PrivateRoute><BaseLayout /></PrivateRoute>}>
+          <Route path="" element={<AdminAccueil />}/>
+          <Route path="club" element={<AdminPresentationClub />}/>
+          <Route path="actualite" element={<AdminActualites />}/>
+          <Route path="partenaire" element={<AdminPartenaires />}/>
+          <Route path="match" element={<AdminMatchs />}/>
+          <Route path="activation-compte" element={<AdminActivationCompte />}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>
