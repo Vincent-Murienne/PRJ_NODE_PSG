@@ -1,8 +1,8 @@
 // src/pages/Accueil.tsx
 import React, { useEffect, useState } from 'react';
-import Actualite from '../components/Actualite';
-import Match from '../components/Match';
-import BandeauPartenaires from '../components/BandeauPartenaires';
+import Actualite from '../../components/Actualite';
+import Match from '../../components/Match';
+import BandeauPartenaires from '../../components/BandeauPartenaires';
 
 const Accueil: React.FC = () => {
   const [derniereActualite, setDerniereActualite] = useState<any>(null);
