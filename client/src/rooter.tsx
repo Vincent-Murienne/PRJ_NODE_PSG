@@ -2,21 +2,21 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
-import Accueil from './pages/Accueil';
-import PresentationClub from './pages/PresentationClub';
-import MasculineJunior from './pages/MasculineJunior';
-import MasculineSenior from './pages/MasculineSenior';
-import FeminineJunior from './pages/FeminineJunior';
-import FeminineSenior from './pages/FeminineSenior';
-import Actualites from './pages/Actualites';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Contact from './pages/Contact';
-import MentionsLegales from './pages/MentionsLegales';
+import Accueil from './pages/public/Accueil';
+import PresentationClub from './pages/public/PresentationClub';
+import MasculineJunior from './pages/public/MasculineJunior';
+import MasculineSenior from './pages/public/MasculineSenior';
+import FeminineJunior from './pages/public/FeminineJunior';
+import FeminineSenior from './pages/public/FeminineSenior';
+import Actualites from './pages/public/Actualites';
+import Login from './pages/public/Login';
+import Register from './pages/public/Register';
+import Contact from './pages/public/Contact';
+import MentionsLegales from './pages/public/MentionsLegales';
 
 // Pages privées (Espace d'administration)
 import AdminAccueil from './pages/admin/AdminAccueil';
-import AdminPresentationClub from './pages/admin/AdminPresentationClub';
+import AdminPresentationClub from './pages/admin/AdminClub';
 import AdminActualites from './pages/admin/AdminActualites';
 import AdminPartenaires from './pages/admin/AdminPartenaires';
 import AdminMatchs from './pages/admin/AdminMatchs';
