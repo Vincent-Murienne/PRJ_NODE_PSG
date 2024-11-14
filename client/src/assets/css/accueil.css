@@ -1,4 +1,3 @@
-/* Styles généraux pour la page */
 .accueil {
     display: flex;
     flex-direction: column;
@@ -7,21 +6,19 @@
     font-family: Arial, sans-serif;
   }
 
-/* Styles spécifiques pour la section de la dernière actualité */
 .derniere-actualite {
   display: flex;
-  justify-content: center; /* Centre horizontalement le contenu */
-  align-items: center; /* Centre verticalement le contenu */
+  justify-content: center;
+  align-items: center;
   background-color: #f8f9fa;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Agrandissement de l'image et du texte pour la dernière actualité */
 .derniere-actualite .actualite-image {
   width: 100%;
-  max-width: 100%; /* Augmenter la taille de l'image */
+  max-width: 100%;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
@@ -69,7 +66,6 @@
   }
 }
 
-/* Section calendrier des matchs */
 .calendrier-matches {
   padding: 1rem;
   border-radius: 8px;
@@ -88,31 +84,27 @@
   font-size: 1.2rem;
 }
 
-/* Style des matchs pour affichage horizontal */
 .matches {
   display: flex;
-  flex-wrap: wrap; /* Permet aux éléments de passer à la ligne si nécessaire */
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
-/* Style des cartes de match */
 .match {
   background-color: #ffffff;
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  flex: 1 1 calc(33.33% - 1rem); /* Largeur flexible pour un affichage en trois colonnes */
-  min-width: 200px; /* Largeur minimale pour éviter les cartes trop petites */
+  flex: 1 1 calc(33.33% - 1rem);
+  min-width: 200px;
 }
 
-/* Contenu du match aligné verticalement */
 .match-contenu {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Styles responsives pour tablettes et mobiles */
 @media (min-width: 768px) {
   .matches {
     grid-template-columns: 1fr 1fr;
@@ -135,18 +127,15 @@
   }
 }
 
-  
- /* Ajustement de l'image des dernières actualités */
 .actualite-image {
   width: 100%;
-  max-width: 300px; /* Limite la largeur maximale des images */
+  max-width: 300px;
   height: auto;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 0.5rem;
 }
 
-/* Section des dernières actualités */
 .dernieres-actualites .actualite {
   display: flex;
   flex-direction: column;
@@ -157,51 +146,40 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive design pour différentes tailles d'écran */
-
-/* Pour tablettes (largeurs à partir de 768px) */
 @media (min-width: 768px) {
-  /* Layout pour les dernières actualités */
   .actualites {
-    grid-template-columns: 1fr 1fr; /* Deux colonnes sur tablette */
+    grid-template-columns: 1fr 1fr;
   }
 
-  /* Alignement du contenu pour une meilleure lisibilité */
   .dernieres-actualites .actualite {
     flex-direction: row;
     justify-content: start;
   }
 
-  /* Ajustement des images pour les tablettes */
   .actualite-image {
-    max-width: 200px; /* Réduction de la taille de l'image sur tablette */
+    max-width: 200px;
     margin-right: 1rem;
   }
 }
 
-/* Pour les grands écrans (largeurs à partir de 1024px) */
 @media (min-width: 1024px) {
-  /* Layout pour les dernières actualités */
   .actualites {
-    grid-template-columns: 1fr 1fr 1fr; /* Trois colonnes sur les grands écrans */
+    grid-template-columns: 1fr 1fr 1fr;
   }
 
-  /* Alignement des éléments pour maximiser l'espace */
   .dernieres-actualites .actualite {
     flex-direction: row;
     justify-content: start;
   }
 
-  /* Taille de l'image pour les grands écrans */
   .actualite-image {
-    max-width: 250px; /* Taille moyenne sur PC */
+    max-width: 250px;
     margin-right: 1rem;
   }
 }
 
-/* Layout mobile par défaut */
 .actualites {
-  grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+  grid-template-columns: 1fr;
 }
 
 
@@ -210,36 +188,36 @@
   padding: 1rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center; /* Centrer le contenu de manière générale */
+  text-align: center;
 }
 
 .bandeau-partenaires h2 {
-  margin-bottom: 2rem;  /* Espace entre le titre et les logos */
+  margin-bottom: 2rem;
   font-size: 1.5rem;
   text-align: center;
 }
 
 .partenaires {
   display: flex;
-  justify-content: center; /* Centrer les logos horizontalement */
-  gap: 1rem;               /* Espacement entre les logos */
-  margin-top: 1rem;        /* Espace entre le titre et les logos */
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .partenaire {
   display: flex;
-  flex-direction: row;  /* Maintenir les logos dans une colonne */
-  align-items: center;     /* Centrer les logos verticalement dans leur cellule */
+  flex-direction: row;
+  align-items: center;
   justify-content: center;
   gap: 5%;
 }
 
 .partenaire a {
-  display: block;          /* Permet de rendre le lien cliquable sur toute la zone de l'image */
+  display: block;
 }
 
 .partenaire-logo {
-  max-width: 100px;         /* Taille du logo */
+  max-width: 100px;
   max-height: 100px;
   object-fit: contain;
   border-radius: 8px;
@@ -247,15 +225,5 @@
 }
 
 .partenaire-logo:hover {
-  transform: scale(1.1);       /* Agrandit légèrement le logo au survol */
-}
-
-.partenaire-url {
-  margin-top: 0.5rem;
-  color: #007bff;               /* Couleur du lien */
-  text-decoration: none;
-}
-
-.partenaire-url:hover {
-  text-decoration: underline;
+  transform: scale(1.1);
 }

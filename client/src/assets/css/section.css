@@ -5,7 +5,6 @@
   padding: 20px;
 }
 
-/* Titre principal */
 .masculine-junior h2 {
   color: #2c3e50;
   font-size: 24px;
@@ -13,7 +12,6 @@
   text-align: center;
 }
 
-/* Sous-titre */
 .masculine-junior h3 {
   font-size: 20px;
   color: #ce0c0c;
@@ -22,7 +20,6 @@
   text-align: center;
 }
 
-/* Table */
 .masculine-junior table {
   width: 100%;
   border-collapse: collapse;
@@ -51,7 +48,6 @@
   background-color: #ecf0f1;
 }
 
-/* Liste des prochains matchs */
 .masculine-junior ul {
   list-style-type: none;
   padding-left: 0;
@@ -78,7 +74,6 @@
   text-align: center;
 }
 
-/* Paragraphe */
 .masculine-junior p {
   text-align: center;
   font-size: 16px;
@@ -86,9 +81,6 @@
   margin-bottom: 20px;
 }
 
-/* Media queries pour rendre responsive */
-
-/* Petits écrans (téléphones) */
 @media (max-width: 600px) {
   .masculine-junior h2 {
       font-size: 20px;
@@ -118,7 +110,6 @@
   }
 }
 
-/* Moyens écrans (tablettes) */
 @media (min-width: 601px) and (max-width: 1024px) {
   .masculine-junior h2 {
       font-size: 22px;
@@ -144,7 +135,6 @@
   }
 }
 
-/* Grands écrans (ordinateurs de bureau) */
 @media (min-width: 1025px) {
   .masculine-junior h2 {
       font-size: 26px;

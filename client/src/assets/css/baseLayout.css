@@ -1,11 +1,9 @@
-/* Styles généraux */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
 }
 
-/* Barre de navigation */
 nav {
     background-color: #333;
     color: white;
@@ -52,10 +50,9 @@ nav ul li a.active {
     border-radius: 5px;
 }
 
-/* Styles pour les petits écrans (mobile) */
 @media (max-width: 1100px) {
     nav ul {
-        display: none; /* Masquer les liens de la navigation sur mobile */
+        display: none;
         flex-direction: column;
         width: 100%;
         position: absolute;
@@ -67,7 +64,7 @@ nav ul li a.active {
     }
 
     nav ul.show {
-        display: flex; /* Afficher le menu quand activé */
+        display: flex;
     }
 
     nav .hamburger {
@@ -85,7 +82,6 @@ nav ul li a.active {
     }
 }
 
-/* Styles pour les écrans plus grands (tablettes et ordinateurs de bureau) */
 @media (min-width: 1110px) {
     nav ul {
         display: flex;
@@ -93,20 +89,20 @@ nav ul li a.active {
     }
 
     nav .hamburger {
-        display: none; /* Masquer l'icône hamburger sur les grands écrans */
+        display: none;
     }
 }
 
 footer {
     background-color: #333;
     color: white;
-    padding: 2rem 1rem; /* Padding réduit pour un footer moins imposant */
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
     margin-top: 2rem;
-    flex-shrink: 0; /* S'assurer que le footer ne rétrécit pas */
+    flex-shrink: 0;
 }
 
 .footer-content {
@@ -114,7 +110,7 @@ footer {
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
-    gap: 1rem; /* Réduction de l'espace entre les sections pour un look plus compact */
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
@@ -124,13 +120,13 @@ footer {
 }
 
 .footer-section h3 {
-    margin-bottom: 0.5rem; /* Réduction de l'espacement sous le titre */
+    margin-bottom: 0.5rem;
     color: #f4f4f4;
 }
 
 .footer-section p {
     line-height: 1.5;
-    margin: 0.5rem 0; /* Ajout d'un léger espace entre les paragraphes pour plus de clarté */
+    margin: 0.5rem 0;
 }
 
 .footer-section ul {
@@ -155,7 +151,7 @@ footer {
 
 .social-links {
     display: flex;
-    gap: 0.5rem; /* Réduction de l'espace entre les icônes sociales */
+    gap: 0.5rem;
 }
 
 .social-links a {
@@ -170,9 +166,9 @@ footer {
 
 .footer-bottom {
     text-align: center;
-    margin-top: 0.5rem; /* Moins d'espace au-dessus de la ligne de séparation */
+    margin-top: 0.5rem;
     font-size: 0.9rem;
     border-top: 1px solid #444;
-    padding-top: 0.5rem; /* Réduction du padding en haut de la ligne de séparation */
+    padding-top: 0.5rem;
     width: 100%;
 }

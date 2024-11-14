@@ -1,21 +1,19 @@
-/* Styles pour le conteneur du formulaire */
 .login-container {
   width: 100%;
-  max-width: 500px; /* Largeur maximale du formulaire */
+  max-width: 500px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   text-align: center;
-  box-sizing: border-box; /* Inclure la padding dans la largeur totale */
-  margin: 20px auto; /* Centrage horizontal */
+  box-sizing: border-box;
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* Titre du formulaire */
 .login-title {
   font-size: 24px;
   font-weight: bold;
@@ -23,22 +21,20 @@
   margin-bottom: 20px;
 }
 
-/* Styles des champs de saisie */
 .login-input {
-  width: 100%; /* Prendre toute la largeur du conteneur */
-  max-width: 400px; /* Largeur maximale */
+  width: 100%;
+  max-width: 400px;
   padding: 10px;
   margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #ddd;
   font-size: 16px;
-  box-sizing: border-box; /* Inclure padding et border dans la largeur */
+  box-sizing: border-box;
 }
 
-/* Bouton de connexion */
 .login-button {
   width: 100%;
-  max-width: 400px; /* Largeur maximale */
+  max-width: 400px;
   padding: 10px;
   background-color: #071a2e;
   color: #fff;
@@ -49,7 +45,6 @@
   box-sizing: border-box;
 }
 
-/* Styles pour le lien "Mot de passe oublié" */
 .forgot-password {
   color: #071a2e;
   margin-top: 10px;
@@ -60,7 +55,6 @@
   text-decoration: underline;
 }
 
-/* Modale de confirmation */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -97,9 +91,6 @@
   background-color: #031c37;
 }
 
-/* Media Queries pour la Responsivité */
-
-/* Mobile first : Le formulaire prend toute la largeur possible */
 @media (max-width: 600px) {
   .login-container {
     padding: 20px;
@@ -111,7 +102,7 @@
 
   .login-input,
   .login-button {
-    width: 100%; /* Utiliser toute la largeur disponible */
+    width: 100%;
     max-width: 100%;
   }
 
@@ -120,7 +111,6 @@
   }
 }
 
-/* Tablette et écrans plus grands */
 @media (min-width: 601px) {
   .login-container {
     padding: 30px;
@@ -137,7 +127,6 @@
   }
 }
 
-/* Ordinateurs de bureau et grands écrans */
 @media (min-width: 1024px) {
   .login-container {
     padding: 40px;

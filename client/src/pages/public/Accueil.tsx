@@ -134,7 +134,7 @@ const Accueil: React.FC = () => {
             <Partenaire
               key={index}
               logo={partenaire.logo}
-              url={partenaire.url} // Assure-toi que chaque partenaire ait une URL associée
+              url={partenaire.url}
             />
           ))}
         </div>
