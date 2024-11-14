@@ -1,36 +1,49 @@
 import React, { useState } from 'react';
-import '../../assets/css/loginRegister/login.css';
+import { useNavigate } from 'react-router-dom'; 
+import '../../assets/css/loginRegister.css';
+import LoginForm from '../../components/loginRegister/LoginForm';
+
+interface ILoginFormInputs {
+  email: string;
+  password: string;
+}
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('');
+  const apiURL = import.meta.env.VITE_API_URL;
+  const navigate = useNavigate();
 
-  const apiURL = import.meta.env.VITE_API_URL; 
-
-  const handleLogin = async () => {
-    setMessage(''); 
-    if (!email || !password) {
-      setMessage('Tous les champs sont requis.');
-      return;
-    }
+  const onSubmit = async (data: ILoginFormInputs) => {
+    setMessage('');
 
     try {
-      const response = await fetch(`${apiURL}/api/login`, {
+      const response = await fetch(`${apiURL}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }), 
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password,
+        }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        setMessage('Connexion réussie. Vous êtes maintenant connecté.');
-        console.log('JWT:', data.token); 
+      const contentType = response.headers.get('content-type');
+
+      if (contentType && contentType.includes('application/json')) {
+        const responseData = await response.json();
+
+        if (response.ok) {
+          setMessage('Connexion réussie.');
+          console.log('Token JWT:', responseData.token);
+          // Sauvegarder le token dans le localStorage si nécessaire
+          localStorage.setItem('token', responseData.token);
+          navigate('/');
+        } else {
+          setMessage(responseData.message || 'Erreur lors de la connexion.');
+        }
       } else {
-        const errorData = await response.json();
-        setMessage(errorData.message || 'Erreur lors de la connexion.');
+        setMessage('Erreur inattendue : réponse non JSON.');
       }
     } catch (error) {
       console.error('Erreur:', error);
@@ -41,25 +54,8 @@ const Login: React.FC = () => {
   return (
     <div className="login-container">
       <h2 className="login-title">Connexion</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        className="login-input"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        className="login-input"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="login-button" onClick={handleLogin}>
-        Se connecter
-      </button>
+      <LoginForm onSubmit={onSubmit} />
       <p className="message">{message}</p>
-      {/* <p className="forgot-password">Mot de passe oublié ?</p> */}
     </div>
   );
 };

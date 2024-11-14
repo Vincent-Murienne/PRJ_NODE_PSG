@@ -1,47 +1,38 @@
 import React, { useState } from 'react';
-import '../../assets/css/loginRegister/login.css';
+import '../../assets/css/loginRegister.css';
+import LoginRegister from '../../components/loginRegister/RegisterForm';
+
+interface IFormInputs {
+  fullName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
 
 const Register: React.FC = () => {
-  const [fullName, setFullName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [message, setMessage] = useState<string>('');
-
+  const [showModal, setShowModal] = useState<boolean>(false); 
   const apiURL = import.meta.env.VITE_API_URL;
 
-  const handleRegister = async () => {
+  const onSubmit = async (data: IFormInputs) => {
     setMessage('');
-
-    if (!fullName || !email || !password || !confirmPassword) {
-      setMessage('Tous les champs sont requis.');
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setMessage('Les mots de passe ne correspondent pas.');
-      return;
-    }
-
+    
     try {
-      const response = await fetch(`${apiURL}/api/users`, {
+      const response = await fetch(`${apiURL}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          full_name: fullName,
-          email: email,
-          password: password,
+          full_name: data.fullName,
+          email: data.email,
+          password: data.password,
         }),
       });
 
       if (response.ok) {
         setMessage('Inscription réussie. Vous pouvez maintenant vous connecter.');
-        setFullName('');
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
+        setShowModal(true); 
       } else {
         const errorData = await response.json();
         setMessage(errorData.message || 'Erreur lors de l\'inscription.');
@@ -52,42 +43,26 @@ const Register: React.FC = () => {
     }
   };
 
+  const closeModal = () => {
+    setShowModal(false);  
+  };
+
   return (
     <div className="login-container">
       <h2 className="login-title">Créer un compte</h2>
-      <input
-        type="text"
-        placeholder="Nom complet"
-        className="login-input"
-        value={fullName}
-        onChange={(e) => setFullName(e.target.value)}
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        className="login-input"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        className="login-input"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Confirmer le mot de passe"
-        className="login-input"
-        value={confirmPassword}
-        onChange={(e) => setConfirmPassword(e.target.value)}
-      />
-      <button className="login-button" onClick={handleRegister}>
-        S'inscrire
-      </button>    
+      <LoginRegister onSubmit={onSubmit} />
       <p className="message">{message}</p>
-      <br />
+
+      {/* Modale de confirmation */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Inscription réussie</h3>
+            <p>Votre compte a été créé. Pour vous-y connecter, un administrateur l'activera bientôt. Veuillez patienter.</p>
+            <button onClick={closeModal} className="modal-close-button">Fermer</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
