@@ -64,6 +64,7 @@ export const getDuelByIDWithScore = async (req: Request, res: Response): Promise
 };
 
 // Récupérer le calendrier des 3 derniers matchs et des 3 prochains matchs par section
+// Récupérer le calendrier des 3 derniers matchs et des 3 prochains matchs par section
 export const getCalendrier = async (req: Request, res: Response): Promise<void> => {
     const sectionId = req.params.id_section;
 
@@ -76,10 +77,13 @@ export const getCalendrier = async (req: Request, res: Response): Promise<void> 
                     m.date_match, 
                     m.lieu_match, 
                     sec.nom_section, 
+                    ms.score_equipe, 
+                    ms.score_adversaire, 
                     'passe' AS type_match
                 FROM duel m
                 JOIN section sec ON sec.id_section = m.id_section
                 JOIN adversaire adv ON adv.id_adversaire = m.id_adversaire
+                JOIN matchScore ms ON ms.id_matchscore = m.id_matchscore
                 WHERE m.id_section = ?
                 AND m.date_match <= NOW()
                 ORDER BY m.date_match DESC
@@ -93,16 +97,18 @@ export const getCalendrier = async (req: Request, res: Response): Promise<void> 
                     m.date_match, 
                     m.lieu_match, 
                     sec.nom_section, 
+                    ms.score_equipe, 
+                    ms.score_adversaire, 
                     'futur' AS type_match
                 FROM duel m
                 JOIN section sec ON sec.id_section = m.id_section
                 JOIN adversaire adv ON adv.id_adversaire = m.id_adversaire
+                JOIN matchScore ms ON ms.id_matchscore = m.id_matchscore
                 WHERE m.id_section = ?
                 AND m.date_match > NOW()
                 ORDER BY m.date_match ASC
                 LIMIT 3
-            )
-            `,
+            )`,
             [sectionId, sectionId]
         );
 
@@ -116,6 +122,7 @@ export const getCalendrier = async (req: Request, res: Response): Promise<void> 
         res.status(500).json({ message: 'Erreur lors de la récupération du calendrier des matchs.' });
     }
 };
+
 
 // Ajouter un nouveau match
 export const addDuel = async (req: Request, res: Response): Promise<void> => {
