@@ -25,6 +25,31 @@ export const getActualiteByID = async (req: Request, res: Response): Promise<voi
     }
 };
 
+// Récupérer la dernière actualité
+export const getLastActualite = async (req: Request, res: Response): Promise<void> => {
+    const id_actualite = req.params.id_actualite;
+    try {
+        const [actualites] = await db.query<RowDataPacket[]>('SELECT * FROM actualite ORDER BY id_actualite DESC LIMIT 1', [id_actualite]);
+        res.status(200).json(actualites);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur lors de la récupération de la dernière actualité" });
+    }
+};
+
+// Récupérer les 3 dernières actualités
+export const getLastThreeActualites = async (req: Request, res: Response): Promise<void> => {
+    const id_actualite = req.params.id_actualite;
+    try {
+        const [actualites] = await db.query<RowDataPacket[]>('SELECT * FROM actualite ORDER BY id_actualite DESC LIMIT 3', [id_actualite]);
+        res.status(200).json(actualites);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Erreur lors de la récupération des 3 dernières actualités" });
+    }
+};
+
+
 // Ajouter une nouvelle actualité
 export const addActualite = async (req: Request, res: Response): Promise<void> => {
     const { titre, texte_long, resume, image } = req.body;
