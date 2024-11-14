@@ -150,7 +150,7 @@ INSERT INTO `section` (`id_section`, `nom_section`) VALUES
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL AUTO_INCREMENT,
   `full_name` varchar(255) NOT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,desc
   `password` varchar(255) NOT NULL,
   `isActive` tinyint(1) DEFAULT 0,
   `id_role` int(11) NOT NULL,
