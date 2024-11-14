@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import MasculineJunior from '../../components/section/MasculineJunior';
+import Section from '../../components/Section';
 
-const MasculineJuniorPage: React.FC = () => {
+const MasculineJunior: React.FC = () => {
   const sectionId = '1';
   const nom_section = 'Masculine Junior';
   const [matchesWithScores, setMatchesWithScores] = useState<any[]>([]);
@@ -39,7 +39,7 @@ const MasculineJuniorPage: React.FC = () => {
 
   return (
     <div>
-      <MasculineJunior
+      <Section
         nom_section={nom_section}
         matchesWithScores={matchesWithScores}
         nextMatches={nextMatches}
@@ -49,4 +49,4 @@ const MasculineJuniorPage: React.FC = () => {
   );
 };
 
-export default MasculineJuniorPage;
+export default MasculineJunior;

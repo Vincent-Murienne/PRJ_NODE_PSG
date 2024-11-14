@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../assets/css/masculineJunior.css'
+import '../assets/css/section.css'
 
 interface Match {
   id_match: number;
@@ -10,17 +10,21 @@ interface Match {
   score_adversaire?: number;
 }
 
-interface MasculineJuniorProps {
+interface SectionProps {
   nom_section: string;
   matchesWithScores: Match[];
   nextMatches: Match[];
   error: string | null;
 }
 
-const MasculineJunior: React.FC<MasculineJuniorProps> = ({ nom_section, matchesWithScores, nextMatches, error }) => {
+const Section: React.FC<SectionProps> = ({ nom_section, matchesWithScores, nextMatches, error }) => {
   return (
     <div className="masculine-junior">
+        <br />
       <h2>Section {nom_section}</h2>
+      <p>
+        Bienvenue dans la section {nom_section} de notre club ! <br /> Suivez leurs performances lors des matchs et venez encourager l'équipe pour les prochaines rencontres !
+      </p>
 
       <h3>Résultats de tous les matchs précédents</h3>
       {matchesWithScores.length > 0 ? (
@@ -66,4 +70,4 @@ const MasculineJunior: React.FC<MasculineJuniorProps> = ({ nom_section, matchesW
   );
 };
 
-export default MasculineJunior;
+export default Section;
