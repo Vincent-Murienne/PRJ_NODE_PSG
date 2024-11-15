@@ -26,6 +26,7 @@ const AdminMatchPage: React.FC = () => {
   const [matches, setMatches] = useState<Match[]>([]);
   const [selectedMatch, setSelectedMatch] = useState<MatchForm | null>(null);
   const [formMode, setFormMode] = useState<'add' | 'edit' | null>(null);
+  const token = localStorage.getItem('token');
 
   const {
     register,
@@ -59,7 +60,7 @@ const AdminMatchPage: React.FC = () => {
   
       await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
         body: JSON.stringify(data),
       });
   

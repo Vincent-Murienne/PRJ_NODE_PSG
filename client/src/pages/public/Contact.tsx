@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../assets/css/Contact/contact.css';
+import '../../assets/css/contact.css';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({

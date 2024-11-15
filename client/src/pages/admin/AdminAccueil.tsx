@@ -1,39 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../assets/css/adminAccueil.css'; // Assurez-vous que le chemin du fichier est correct
 
 const AdminPage: React.FC = () => {
+  const role = localStorage.getItem('role'); // Récupère le rôle de l'utilisateur depuis localStorage
+  const parsedRole = role ? parseInt(role, 10) : null;
+
   return (
-    <div style={{ textAlign: 'center', marginTop: '50px' }}>
+    <div className="admin-page">
       <h1>Page d'administration</h1>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', marginTop: '30px' }}>
-        <Link to="/admin/club">
-          <button style={buttonStyle}>Gestion du Club</button>
-        </Link>
+      <div className="admin-links-container">
+        {parsedRole === 1 && (
+          <>
+            <Link to="/admin/club">
+              <button className="admin-button">Gestion du Club</button>
+            </Link>
+            <Link to="/admin/activation-compte">
+              <button className="admin-button">Gestion des Utilisateurs</button>
+            </Link>
+          </>
+        )}
         <Link to="/admin/actualite">
-          <button style={buttonStyle}>Gestion des Actualités</button>
+          <button className="admin-button">Gestion des Actualités</button>
         </Link>
         <Link to="/admin/partenaire">
-          <button style={buttonStyle}>Gestion des Partenaires</button>
+          <button className="admin-button">Gestion des Partenaires</button>
         </Link>
         <Link to="/admin/match">
-          <button style={buttonStyle}>Gestion des Matchs</button>
-        </Link>
-        <Link to="/admin/activation-compte">
-          <button style={buttonStyle}>Gestion des Utilisateurs</button>
+          <button className="admin-button">Gestion des Matchs</button>
         </Link>
       </div>
+      <br />
     </div>
   );
-};
-
-const buttonStyle: React.CSSProperties = {
-  padding: '10px 20px',
-  fontSize: '16px',
-  cursor: 'pointer',
-  backgroundColor: '#007bff',
-  color: '#fff',
-  border: 'none',
-  borderRadius: '5px',
 };
 
 export default AdminPage;

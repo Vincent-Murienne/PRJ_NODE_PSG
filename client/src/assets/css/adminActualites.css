@@ -1,0 +1,99 @@
+/* Conteneur principal de la page d'administration */
+.admin-page {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  /* Titre principal */
+  .admin-page h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Conteneur pour les boutons d'action */
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  
+  /* Style des boutons d'action */
+  .action-button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  /* Effet hover des boutons d'action */
+  .action-button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Section pour l'ajout/modification des actualités */
+  .actualite-form-section {
+    margin-top: 30px;
+    text-align: left;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Titre pour l'ajout ou la modification */
+  .actualite-form-section h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  
+  /* Label pour l'ID de l'actualité */
+  .actualite-form-section label {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  /* Champ de texte pour l'ID */
+  .actualite-id-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  /* Formulaire de création ou modification */
+  .actualite-form {
+    margin-top: 20px;
+  }
+  
+  /* Bouton de soumission */
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+  }
+  
+  /* Effet hover du bouton de soumission */
+  .submit-button:hover {
+    background-color: #218838;
+  }
+  

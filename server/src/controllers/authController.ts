@@ -25,34 +25,46 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
     try {
         // Rechercher l'utilisateur dans la base de données
-        const [rows] = await db.query<RowDataPacket[]>('SELECT * FROM user WHERE email = ?', [email]);
+        console.log(`Recherche de l'utilisateur avec l'email : ${email}`);
+        const [rows] = await db.query<RowDataPacket[]>(
+            `SELECT u.*, r.nom_role FROM user u 
+            LEFT JOIN role r ON u.id_role = r.id_role 
+            WHERE u.email = ?`,
+            [email]
+        );
+        
 
         if (rows.length === 0) {
+            console.log('Utilisateur non trouvé.');
             res.status(404).json({ message: 'Utilisateur non trouvé.' });
             return;
         }
 
         const user = rows[0];
+        console.log('Utilisateur trouvé :', user);
 
         // Vérifier si le mot de passe est correct
         if (!user.password.startsWith('$')) {
-            // Si le mot de passe ne commence pas par '$', il n'a probablement pas été hashé correctement
+            console.log('Mot de passe stocké non valide.');
             res.status(500).json({ message: 'Mot de passe stocké non valide. Contactez l\'administrateur.' });
             return;
         }
 
         const validPassword = await argon2.verify(user.password, password);
         if (!validPassword) {
+            console.log('Mot de passe incorrect.');
             res.status(401).json({ message: 'Mot de passe incorrect.' });
             return;
         }
 
         if (!user.isActive) {
+            console.log('Compte non activé.');
             res.status(403).json({ message: 'Votre compte n\'est pas encore activé.' });
             return;
         }
 
         // Créer un JWT pour l'utilisateur
+        console.log('Création du JWT pour l\'utilisateur.');
         const token = jwt.sign(
             { id: user.id_user, email: user.email, role: user.id_role },
             JWT_SECRET,
@@ -61,15 +73,21 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
         // Crypter le mot de passe avec SimpleCrypto
         const encryptedPassword = simpleCrypto.encrypt(password);
-        // Retourner le jeton JWT et le mot de passe crypté
+        console.log('Mot de passe crypté:', encryptedPassword);
+
+        // Log pour vérifier le rôle avant de le retourner
+        console.log('Rôle de l\'utilisateur:', user.id_role);
+
+        // Retourner le jeton JWT, le mot de passe crypté et le rôle
         res.status(200).json({
             message: 'Connexion réussie.',
             token,
-            encryptedPassword
+            encryptedPassword,
+            role: user.id_role // Ajout du rôle ici pour vérifier
         });
 
     } catch (error) {
-        console.error(error);
+        console.error('Erreur lors de la connexion:', error);
         res.status(500).json({ message: 'Erreur lors de la connexion.' });
     }
 };

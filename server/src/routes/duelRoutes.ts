@@ -17,10 +17,10 @@ router.get('/duels/:id_match/score', getDuelByIDWithScore);
 router.get('/duels/:id_section/calendrier', getCalendrier);
 
 // Route pour ajouter un nouveau match
-router.post('/duels', addDuel);
+router.post('/duels', authenticateToken, addDuel);
 
 // Route pour mettre à jour un match
-router.put('/duels/:id_match', updateDuel);
+router.put('/duels/:id_match', authenticateToken, updateDuel);
 
 // Route pour mettre à jour le score d'un match déjà joué
 router.put('/duels/:id_match/score', authenticateToken, updateMatchScore);

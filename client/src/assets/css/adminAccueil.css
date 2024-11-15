@@ -1,0 +1,49 @@
+/* Conteneur principal */
+.admin-page {
+    text-align: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Titre de la page */
+  .admin-page h1 {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  /* Conteneur des liens de gestion */
+  .admin-links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 30px;
+    align-items: center;
+  }
+  
+  /* Style des boutons */
+  .admin-button {
+    background-color: #007BFF;
+    color: white;
+    font-size: 1rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    width: 250px;
+  }
+  
+  /* Effet hover des boutons */
+  .admin-button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Effet focus des boutons */
+  .admin-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+  }
+  

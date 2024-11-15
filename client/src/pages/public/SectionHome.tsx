@@ -22,6 +22,10 @@ const SectionHome: React.FC = () => {
       <br />
       <br />
       <br />
+      <br />
+      <br />
+      <br />
+      <br />
       </div>
 
   );

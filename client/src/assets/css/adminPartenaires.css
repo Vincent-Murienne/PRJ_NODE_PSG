@@ -1,0 +1,174 @@
+/* Conteneur principal de la page */
+.admin-partenaires-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* Titre principal */
+  .admin-partenaires-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Liste des partenaires */
+  .partenaires-list {
+    margin-bottom: 30px;
+  }
+  
+  .partenaires-list h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .partenaires-list ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .partenaires-list .partenaire-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .partenaires-list .partenaire-item .partenaire-id {
+    font-weight: bold;
+  }
+  
+  .partenaires-list .partenaire-item .partenaire-logo {
+    max-width: 50px;
+    height: auto;
+    margin-right: 15px;
+  }
+  
+  .partenaires-list .partenaire-item button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .partenaires-list .partenaire-item button:hover {
+    background-color: #0056b3;
+  }
+  
+  .partenaires-list .partenaire-item button.delete-btn {
+    background-color: #dc3545;
+  }
+  
+  .partenaires-list .partenaire-item button.delete-btn:hover {
+    background-color: #c82333;
+  }
+  
+  /* Formulaire de gestion des partenaires */
+  .form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .form-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  .partenaire-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .input-group label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .input-group input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 5px;
+  }
+  
+  button.submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  button.submit-btn:hover {
+    background-color: #218838;
+  }
+  
+  button.cancel-btn {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button.cancel-btn:hover {
+    background-color: #5a6268;
+  }
+  
+  button.add-partenaire-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+  }
+  
+  button.add-partenaire-btn:hover {
+    background-color: #0056b3;
+  }
+  
