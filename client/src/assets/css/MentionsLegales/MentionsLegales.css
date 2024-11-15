@@ -1,0 +1,52 @@
+.mentions-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    text-align: left;
+  }
+  
+  /* Titre principal */
+  .mentions-title {
+    font-size: 24px;
+    font-weight: bold;
+    color:  #333;;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Sous-titres des sections */
+  .mentions-section-title {
+    font-size: 18px;
+    color: #0066cc;
+    margin-top: 20px;
+    font-weight: bold;
+  }
+  
+  /* Paragraphes de texte */
+  .mentions-paragraph {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #555;
+  }
+  
+  /* Informations de contact */
+  .mentions-contact-info {
+    font-weight: bold;
+    color: #555;
+    font-size: 16px;
+  }
+  
+  /* Footer */
+  .mentions-footer {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+  }

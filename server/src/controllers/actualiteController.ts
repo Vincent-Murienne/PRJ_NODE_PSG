@@ -1,6 +1,8 @@
 import { Request, Response } from 'express';
 import db from '../db';
 import { ResultSetHeader, RowDataPacket } from 'mysql2';
+const currentDate = new Date().toISOString().split('T')[0];
+
 
 // Récupérer toutes les actualités
 export const getAllActualites = async (req: Request, res: Response): Promise<void> => {
@@ -52,9 +54,9 @@ export const getLastThreeActualites = async (req: Request, res: Response): Promi
 
 // Ajouter une nouvelle actualité
 export const addActualite = async (req: Request, res: Response): Promise<void> => {
-    const { titre, texte_long, resume, image } = req.body;
+    const {  titre, texte_long, resume, image } = req.body;
 
-    if (!titre || !texte_long || !resume || !image) {
+    if (!titre ||!texte_long || !resume || !image) {
         res.status(400).json({ message: 'Les champs titre, texte_long, résumé et image sont obligatoires.' });
         return;
     }
@@ -63,9 +65,12 @@ export const addActualite = async (req: Request, res: Response): Promise<void> =
 
     try {
         const [result] = await db.query<ResultSetHeader>(
-            'INSERT INTO actualite (titre, texte_long, resume, image, date) VALUES (?, ?, ?, ?, ?)', 
-            [titre, texte_long, resume, image, currentDate]
+            'INSERT INTO actualite (titre, texte_long, resume,image, date) VALUES ( ? ,?, ?, ?, ?)', 
+            
+            [ titre,texte_long, resume,image, currentDate]
+            
         );
+        
 
         res.status(201).json({ message: 'Actualité ajoutée avec succès.', id_actualite: result.insertId });
     } catch (error) {
