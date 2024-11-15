@@ -1,20 +1,36 @@
-import { Outlet, NavLink } from "react-router-dom";
-import { useState } from "react"; 
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import '../assets/css/baseLayout.css';
 
 const BaseLayout = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false); 
-    const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('token'))); 
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // État pour contrôler l'ouverture du menu
+    const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('token'))); // Suivi de l'authentification
+    const [role, setRole] = useState(localStorage.getItem('role')); // Suivi du rôle de l'utilisateur
+    const navigate = useNavigate(); // Utilisation de useNavigate pour rediriger après la déconnexion
+    const parsedRole = role ? parseInt(role, 10) : null;
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Fonction pour gérer la déconnexion
+    // Met à jour l'état d'authentification à chaque changement dans localStorage
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const storedRole = localStorage.getItem('role');
+        console.log('Token récupéré:', token); // Log pour vérifier le token
+        console.log('Rôle récupéré:', storedRole); // Log pour vérifier le rôle
+        setIsAuthenticated(!!token);
+        setRole(storedRole); // Met à jour le rôle dans l'état
+    }, []);
+    
+
+    // Fonction de déconnexion
     const handleLogout = () => {
         localStorage.removeItem('token');
-        setIsAuthenticated(false); 
-        window.location.href = '/login';
+        localStorage.removeItem('role'); // Suppression du rôle du localStorage
+        setIsAuthenticated(false); // Mise à jour de l'état immédiatement
+        setRole(null); // Réinitialise le rôle
+        navigate('/login'); // Redirection vers la page de connexion
     };
 
     return (
@@ -40,7 +56,14 @@ const BaseLayout = () => {
 
                         {/* Si l'utilisateur est connecté, afficher les liens d'administration */}
                         {isAuthenticated && (
-                            <li><NavLink to="/admin/">Admin Accueil</NavLink></li>
+                            <>
+                                {parsedRole === 2 && (
+                                    <li><NavLink to="/admin">Editeur Accueil</NavLink></li>
+                                )}
+                                {parsedRole === 1 && (
+                                    <li><NavLink to="/admin/">Admin Accueil</NavLink></li>
+                                )}
+                            </>
                         )}
 
                         {/* Lien de connexion ou de déconnexion selon l'état d'authentification */}

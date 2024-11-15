@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "../../assets/css/Actualites/Actualites.css"
+import "../../assets/css/actualites.css"
 
 interface Actualite {
   id_actualite: number;

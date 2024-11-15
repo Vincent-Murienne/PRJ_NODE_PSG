@@ -44,6 +44,9 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
       </button>
     </form>
     <br />
+    <br />
+    <br />
+    <br />
     </>
   );
 

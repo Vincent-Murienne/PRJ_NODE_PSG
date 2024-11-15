@@ -11,13 +11,12 @@ router.get('/partenaires', getAllPartenaires);
 router.get('/partenaires/:id_partenaire', getPartenaireByID);
 
 // Route pour ajouter un nouveau partenaire
-router.post('/partenaires', addPartenaire);
+router.post('/partenaires', authenticateToken, authorizeRole([1]), addPartenaire);
 
 // Route pour mettre à jour un partenaire
-router.put('/partenaires/:id_partenaire', updatePartenaire);
+router.put('/partenaires/:id_partenaire', authenticateToken, updatePartenaire);
 
 // Route pour supprimer un partenaire
-router.delete('/partenaires/:id_partenaire', deletePartenaire);
-//router.delete('/partenaires/:id_partenaire', authenticateToken, authorizeRole([1]), deletePartenaire);
+router.delete('/partenaires/:id_partenaire', authenticateToken, authorizeRole([1]), deletePartenaire);
 
 export default router;

@@ -9,10 +9,16 @@ const PresentationClub: React.FC = () => {
   useEffect(() => {
     fetch(`${apiURL}/clubs`)
       .then(res => res.json())
-      .then(data => setClubData(data))   
+      .then(data => {
+        console.log('Données récupérées:', data); // Vérifiez que vous recevez bien les données
+        setClubData(data); // Mettez les données dans le state
+      })
       .catch(error => console.error('Erreur lors de la récupération des partenaires:', error));
   }, [apiURL]);
-  
+
+  // Log pour vérifier la structure de clubData
+  console.log('ClubData dans le render:', clubData);
+
   return (
     <div className="presentation-club">
       <h1>Présentation du Club</h1>
@@ -21,10 +27,12 @@ const PresentationClub: React.FC = () => {
         alt='psg' 
         className='img-psg-presentation' 
       />
-      {clubData && clubData.length > 0 && (
+      
+      {/* Vérifiez si clubData existe et a les propriétés presentation et histoire */}
+      {clubData && clubData.presentation && clubData.histoire && (
         <Club
-          presentation={clubData[0].presentation}
-          histoire={clubData[0].histoire}
+          presentation={clubData.presentation}  // Accéder directement à presentation et histoire
+          histoire={clubData.histoire}
         />
       )}
     </div>

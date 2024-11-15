@@ -1,0 +1,79 @@
+/* Conteneur principal */
+.admin-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Titre principal */
+  .admin-container h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Affichage des données actuelles */
+  .admin-data {
+    margin-bottom: 30px;
+  }
+  
+  .admin-data h2 {
+    font-size: 1.5rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .admin-data p {
+    font-size: 1rem;
+    color: #777;
+    line-height: 1.6;
+  }
+  
+  /* Formulaire */
+  .admin-form {
+    margin-top: 20px;
+  }
+  
+  .admin-form label {
+    font-size: 1rem;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .admin-form textarea {
+    width: 100%;
+    height: 100px;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  /* Message d'erreur */
+  .admin-form .error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  /* Bouton de soumission */
+  .submit-button {
+    padding: 10px 20px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  /* Effet hover du bouton */
+  .submit-button:hover {
+    background-color: darkblue;
+  }
+  

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import '../../assets/css/adminClub.css';
 
 type ClubData = {
   presentation: string;
@@ -9,6 +10,7 @@ type ClubData = {
 const AdminPage: React.FC = () => {
   const [clubData, setClubData] = useState<ClubData | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ClubData>();
+  const token = localStorage.getItem('token');
 
   // Charger les données initiales
   useEffect(() => {
@@ -35,7 +37,7 @@ const AdminPage: React.FC = () => {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/clubs/1`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "application/json", 'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data),
       });
@@ -53,12 +55,12 @@ const AdminPage: React.FC = () => {
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
+    <div className="admin-container">
       <h1>Administration du Club</h1>
       
       {/* Affichage des données */}
       {clubData ? (
-        <div>
+        <div className="admin-data">
           <h2>Présentation actuelle :</h2>
           <p>{clubData.presentation}</p>
           <h2>Histoire actuelle :</h2>
@@ -69,15 +71,14 @@ const AdminPage: React.FC = () => {
       )}
 
       {/* Formulaire */}
-      <form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: "20px" }}>
+      <form onSubmit={handleSubmit(onSubmit)} className="admin-form">
         <div>
           <label htmlFor="presentation">Présentation</label>
           <textarea
             id="presentation"
             {...register("presentation", { required: "La présentation est obligatoire" })}
-            style={{ width: "100%", height: "100px", margin: "10px 0" }}
           />
-          {errors.presentation && <p style={{ color: "red" }}>{errors.presentation.message}</p>}
+          {errors.presentation && <p className="error-message">{errors.presentation.message}</p>}
         </div>
 
         <div>
@@ -85,12 +86,11 @@ const AdminPage: React.FC = () => {
           <textarea
             id="histoire"
             {...register("histoire", { required: "L'histoire est obligatoire" })}
-            style={{ width: "100%", height: "100px", margin: "10px 0" }}
           />
-          {errors.histoire && <p style={{ color: "red" }}>{errors.histoire.message}</p>}
+          {errors.histoire && <p className="error-message">{errors.histoire.message}</p>}
         </div>
 
-        <button type="submit" style={{ padding: "10px 20px", backgroundColor: "blue", color: "white", border: "none", cursor: "pointer" }}>
+        <button type="submit" className="submit-button">
           Mettre à jour
         </button>
       </form>

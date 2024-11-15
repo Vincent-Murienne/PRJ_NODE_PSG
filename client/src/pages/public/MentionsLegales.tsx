@@ -1,7 +1,5 @@
-
-// } 
 import React, { Component } from 'react';
-import "../../assets/css/MentionsLegales/MentionsLegales.css";
+import "../../assets/css/MentionsLegales.css";
 
 export default class MentionsLegales extends Component {
   render() {

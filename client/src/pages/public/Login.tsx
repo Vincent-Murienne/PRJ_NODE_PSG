@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 
   const onSubmit = async (data: ILoginFormInputs) => {
     setMessage('');
-
+  
     try {
       const response = await fetch(`${apiURL}/login`, {
         method: 'POST',
@@ -27,17 +27,21 @@ const Login: React.FC = () => {
           password: data.password,
         }),
       });
-
+  
       const contentType = response.headers.get('content-type');
-
+  
       if (contentType && contentType.includes('application/json')) {
         const responseData = await response.json();
-
+        console.log('Données reçues de l\'API:', responseData); // Log pour voir la réponse
+  
         if (response.ok) {
           setMessage('Connexion réussie.');
           console.log('Token JWT:', responseData.token);
-          // Sauvegarder le token dans le localStorage si nécessaire
+  
+          // Sauvegarder le token et le rôle dans le localStorage
           localStorage.setItem('token', responseData.token);
+          localStorage.setItem('role', responseData.role); // Assurez-vous que 'role' est bien présent dans la réponse
+  
           navigate('/');
         } else {
           setMessage(responseData.message || 'Erreur lors de la connexion.');
@@ -50,6 +54,8 @@ const Login: React.FC = () => {
       setMessage('Erreur lors de la connexion.');
     }
   };
+  
+  
 
   return (
     <div className="login-container">

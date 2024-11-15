@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import '../../assets/css/adminPartenaires.css';
 
 type Partenaire = {
   id_partenaire: number;
   logo: string;
   url: string;
 };
-
+const token = localStorage.getItem('token');
 const AdminPartenaires: React.FC = () => {
   const [partenaires, setPartenaires] = useState<Partenaire[]>([]);
   const [selectedPartenaire, setSelectedPartenaire] = useState<Partenaire | null>(null);
@@ -32,7 +33,17 @@ const AdminPartenaires: React.FC = () => {
   const onSubmit: SubmitHandler<Partenaire> = (data) => {
     let url = `${import.meta.env.VITE_API_URL}/partenaires`;
     let method: "POST" | "PUT" | "DELETE" = "POST";
-
+    let headers: { [key: string]: string } = {
+      "Content-Type": "application/json",
+    };
+  
+    // Ajouter l'en-tête Authorization uniquement pour PUT et DELETE
+    if (formType === "edit" || formType === "delete") {
+      if (token) {
+        headers["Authorization"] = `Bearer ${token}`;
+      }
+    }
+  
     if (formType === "edit") {
       url += `/${selectedPartenaire?.id_partenaire}`;
       method = "PUT";
@@ -40,10 +51,10 @@ const AdminPartenaires: React.FC = () => {
       url += `/${selectedPartenaire?.id_partenaire}`;
       method = "DELETE";
     }
-
+  
     fetch(url, {
       method,
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: formType !== "delete" ? JSON.stringify(data) : undefined,
     })
       .then((response) => response.json())
@@ -58,6 +69,7 @@ const AdminPartenaires: React.FC = () => {
       })
       .catch((error) => console.error("Erreur lors de la soumission:", error));
   };
+  
 
   // Ouvrir un formulaire avec des valeurs par défaut
   const handleEdit = (partenaire: Partenaire) => {
@@ -71,27 +83,27 @@ const AdminPartenaires: React.FC = () => {
     setFormType("delete");
     setSelectedPartenaire(partenaire);
   };
-
+  
   return (
-    <div>
+    <div className="admin-partenaires-container">
       <h1>Gestion des Partenaires</h1>
 
-      <div>
+      <div className="partenaires-list">
         <h2>Liste des Partenaires</h2>
         <ul>
           {partenaires.map((partenaire) => (
-            <li key={partenaire.id_partenaire}>
-              <span>ID: {partenaire.id_partenaire}</span>
-              <img src={partenaire.logo} alt="Logo" width={50} />
-              <button onClick={() => handleEdit(partenaire)}>Modifier</button>
-              <button onClick={() => handleDelete(partenaire)}>Supprimer</button>
+            <li key={partenaire.id_partenaire} className="partenaire-item">
+              <span className="partenaire-id">ID: {partenaire.id_partenaire}</span>
+              <img className="partenaire-logo" src={partenaire.logo} alt="Logo" width={50} />
+              <button className="edit-btn" onClick={() => handleEdit(partenaire)}>Modifier</button>
+              <button className="delete-btn" onClick={() => handleDelete(partenaire)}>Supprimer</button>
             </li>
           ))}
         </ul>
       </div>
 
       {formType && (
-        <div>
+        <div className="form-container">
           <h2>
             {formType === "add"
               ? "Ajouter un Partenaire"
@@ -99,43 +111,48 @@ const AdminPartenaires: React.FC = () => {
               ? "Modifier le Partenaire"
               : "Supprimer le Partenaire"}
           </h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="partenaire-form">
             {formType !== "delete" && (
               <>
-                <div>
-                  <label>Logo</label>
+                <div className="input-group">
+                  <label htmlFor="logo">Logo</label>
                   <input
                     type="text"
+                    id="logo"
                     {...register("logo", { required: "Le logo est requis" })}
                   />
-                  {errors.logo && <span>{errors.logo.message}</span>}
+                  {errors.logo && <span className="error-message">{errors.logo.message}</span>}
                 </div>
 
-                <div>
-                  <label>URL</label>
+                <div className="input-group">
+                  <label htmlFor="url">URL</label>
                   <input
                     type="text"
+                    id="url"
                     {...register("url", { required: "L'URL est requise" })}
                   />
-                  {errors.url && <span>{errors.url.message}</span>}
+                  {errors.url && <span className="error-message">{errors.url.message}</span>}
                 </div>
               </>
             )}
-            <button type="submit">
+            <button type="submit" className="submit-btn">
               {formType === "add"
                 ? "Ajouter"
                 : formType === "edit"
                 ? "Modifier"
                 : "Supprimer"}
             </button>
-            <button type="button" onClick={() => setFormType(null)}>
+            <button type="button" className="cancel-btn" onClick={() => setFormType(null)}>
               Annuler
             </button>
           </form>
         </div>
       )}
 
-      <button onClick={() => setFormType("add")}>Ajouter un Partenaire</button>
+      <button className="add-partenaire-btn" onClick={() => setFormType("add")}>
+        Ajouter un Partenaire
+      </button>
+      <br/>
     </div>
   );
 };

@@ -17,10 +17,10 @@ router.get('/last-actualites', getLastActualite);
 router.get('/three-last-actualites', getLastThreeActualites);
 
 // Route pour ajouter une nouvelle actualité
-router.post('/actualites', addActualite);
+router.post('/actualites', authenticateToken, addActualite);
 
 // Route pour mettre à jour une actualité
-router.put('/actualites/:id_actualite', updateActualite);
+router.put('/actualites/:id_actualite', authenticateToken, updateActualite);
 
 // Route pour supprimer une actualité
 router.delete('/actualites/:id_actualite', authenticateToken, authorizeRole([1]), deleteActualite);
