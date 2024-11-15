@@ -5,12 +5,13 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    margin-top: 100px;
+    margin: 30px;
   }
   
-  .login-container {
+  .contact-container {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -18,14 +19,14 @@ body {
     text-align: center;
   }
   
-  .login-title {
+  .contact-title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
   }
   
-  .login-input {
+  .contact-input {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
@@ -34,7 +35,18 @@ body {
     font-size: 16px;
   }
   
-  .login-button {
+  .contact-textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    height: 150px;
+    resize: none;
+  }
+  
+  .contact-button {
     width: 100%;
     padding: 10px;
     background-color: #071a2e;
@@ -45,13 +57,21 @@ body {
     cursor: pointer;
   }
   
-  .forgot-password {
-    color: #071a2e;
-    margin-top: 10px;
-    cursor: pointer;
+  .contact-button:hover {
+    background-color: #0c2a43;
   }
   
-  .forgot-password:hover {
+  .contact-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .contact-footer a {
+    color: #071a2e;
+    text-decoration: none;
+  }
+  
+  .contact-footer a:hover {
     text-decoration: underline;
   }
-  

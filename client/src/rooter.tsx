@@ -1,6 +1,6 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 
 import Accueil from './pages/public/Accueil';
 import PresentationClub from './pages/public/PresentationClub';
@@ -22,6 +22,7 @@ import AdminPartenaires from './pages/admin/AdminPartenaires';
 import AdminMatchs from './pages/admin/AdminMatchs';
 import AdminActivationCompte from './pages/admin/AdminActivationCompte';
 import BaseLayout from './layout/BaseLayout';
+import Section from './pages/public/Section';
 
 // Fonction de vérification d'authentification
 const isAuthenticated = () => {
@@ -43,17 +44,20 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <Routes>
         {/* Routes publiques */}
-        <Route path="/" element={<Accueil />} />
-        <Route path="/presentation-club" element={<PresentationClub />} />
-        <Route path="/section-masculine-junior" element={<MasculineJunior />} />
-        <Route path="/section-masculine-senior" element={<MasculineSenior />} />
-        <Route path="/section-feminine-junior" element={<FeminineJunior />} />
-        <Route path="/section-feminine-senior" element={<FeminineSenior />} />
-        <Route path="/actualites" element={<Actualites />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/mentions-legales" element={<MentionsLegales />} />
+        <Route element={<BaseLayout />}>
+          <Route path="/" element={<Accueil />} />
+          <Route path="/presentation-club" element={<PresentationClub />} />
+          <Route path="/sections" element={<Section />} />
+          <Route path="/section-masculine-junior" element={<MasculineJunior />} />
+          <Route path="/section-masculine-senior" element={<MasculineSenior />} />
+          <Route path="/section-feminine-junior" element={<FeminineJunior />} />
+          <Route path="/section-feminine-senior" element={<FeminineSenior />} />
+          <Route path="/actualites" element={<Actualites />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+        </Route>
 
         {/* Routes privées (protégées) */}
         <Route path="/admin/" element={<PrivateRoute><BaseLayout /></PrivateRoute>}>

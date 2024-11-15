@@ -35,6 +35,12 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         const user = rows[0];
 
         // Vérifier si le mot de passe est correct
+        if (!user.password.startsWith('$')) {
+            // Si le mot de passe ne commence pas par '$', il n'a probablement pas été hashé correctement
+            res.status(500).json({ message: 'Mot de passe stocké non valide. Contactez l\'administrateur.' });
+            return;
+        }
+
         const validPassword = await argon2.verify(user.password, password);
         if (!validPassword) {
             res.status(401).json({ message: 'Mot de passe incorrect.' });
@@ -44,7 +50,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         if (!user.isActive) {
             res.status(403).json({ message: 'Votre compte n\'est pas encore activé.' });
             return;
-        }        
+        }
 
         // Créer un JWT pour l'utilisateur
         const token = jwt.sign(
@@ -52,7 +58,6 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
             JWT_SECRET,
             { expiresIn: JWT_EXPIRATION }
         );
-
 
         // Crypter le mot de passe avec SimpleCrypto
         const encryptedPassword = simpleCrypto.encrypt(password);
@@ -67,6 +72,4 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
         console.error(error);
         res.status(500).json({ message: 'Erreur lors de la connexion.' });
     }
-
-    
 };

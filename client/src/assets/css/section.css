@@ -1,0 +1,161 @@
+.masculine-junior {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+.masculine-junior h2 {
+  color: #2c3e50;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.masculine-junior h3 {
+  font-size: 20px;
+  color: #ce0c0c;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.masculine-junior table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.masculine-junior th,
+.masculine-junior td {
+  padding: 12px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+.masculine-junior th {
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+}
+
+.masculine-junior td {
+  background-color: #fff;
+  font-size: 14px;
+}
+
+.masculine-junior tr:hover {
+  background-color: #ecf0f1;
+}
+
+.masculine-junior ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.masculine-junior li {
+  background-color: #fff;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+}
+
+.masculine-junior li:hover {
+  background-color: #ecf0f1;
+}
+
+/* Messages d'erreur */
+.masculine-junior .error {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.masculine-junior p {
+  text-align: center;
+  font-size: 16px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .masculine-junior h2 {
+      font-size: 20px;
+  }
+
+  .masculine-junior h3 {
+      font-size: 18px;
+  }
+
+  .masculine-junior th,
+  .masculine-junior td {
+      padding: 10px;
+      font-size: 12px;
+  }
+
+  .masculine-junior table {
+      font-size: 12px;
+  }
+
+  .masculine-junior li {
+      padding: 10px;
+      font-size: 12px;
+  }
+
+  .masculine-junior {
+      padding: 10px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .masculine-junior h2 {
+      font-size: 22px;
+  }
+
+  .masculine-junior h3 {
+      font-size: 19px;
+  }
+
+  .masculine-junior th,
+  .masculine-junior td {
+      padding: 15px;
+      font-size: 14px;
+  }
+
+  .masculine-junior li {
+      padding: 12px;
+      font-size: 14px;
+  }
+
+  .masculine-junior {
+      padding: 15px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .masculine-junior h2 {
+      font-size: 26px;
+  }
+
+  .masculine-junior h3 {
+      font-size: 22px;
+  }
+
+  .masculine-junior th,
+  .masculine-junior td {
+      padding: 20px;
+      font-size: 16px;
+  }
+
+  .masculine-junior li {
+      padding: 15px;
+      font-size: 16px;
+  }
+
+  .masculine-junior {
+      padding: 30px;
+  }
+}
