@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addUser, updateUser, deleteUser, getAllUsersWithRoles, getUserByIdWithRole, activateUser } from '../controllers/userController';
+import { addUser, updateUser, deleteUser, getAllUsersWithRoles, getUserByIdWithRole, activateUser, getAllUsersNoActivate } from '../controllers/userController';
 import { authorizeRole, authenticateToken } from '../middlewares/auth';
 
 const router = Router();
@@ -9,6 +9,9 @@ router.get('/users', authenticateToken, getAllUsersWithRoles);
 
 // Route pour récupérer un utilisateur
 router.get('/users/:id_user', authenticateToken, getUserByIdWithRole);
+
+// Route pour récupérer tous les utilisateurs non activés
+router.get('/users-no-activate', authenticateToken, authorizeRole([1]), getAllUsersNoActivate);
 
 // Route pour ajouter un nouvel utilisateur
 router.post('/register', addUser);

@@ -43,6 +43,23 @@ export const getUserByIdWithRole = async (req: Request, res: Response): Promise<
     }
 };
 
+// Récupérer tous les utilisateurs ayant un compte non activé
+export const getAllUsersNoActivate = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const [users] = await db.query<RowDataPacket[]>(
+            `SELECT u.id_user, u.full_name, u.email, u.password, u.isActive, r.nom_role 
+            FROM user u
+            JOIN role r ON u.id_role = r.id_role
+            WHERE u.isActive = 0`
+        );
+
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Erreur lors de la récupération des utilisateurs.' });
+    }
+};
+
 // Ajouter un nouvel utilisateur
 export const addUser = async (req: Request, res: Response): Promise<void> => {
     const { full_name, email, password} = req.body;
