@@ -7,6 +7,7 @@ const ContactPage = () => {
     email: '',
     message: '',
   });
+  const [isModalOpen, setIsModalOpen] = useState(false); // Gestion de l'état de la modale
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -17,8 +18,23 @@ const ContactPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     console.log('Form Submitted:', formData);
+
+    // Afficher la modale
+    setIsModalOpen(true);
+
+    // Fermer la modale après 3 secondes
+    setTimeout(() => {
+      setIsModalOpen(false);
+    }, 3000);
+
+    // Réinitialiser le formulaire
+    setFormData({
+      name: '',
+      email: '',
+      message: '',
+    });
   };
 
   return (
@@ -56,8 +72,18 @@ const ContactPage = () => {
         </button>
       </form>
       <div className="contact-footer">
-        <p>Vous pouvez aussi nous contacter via <a href="mailto:support@contact.com">support@contact.com</a></p>
+        <p>
+          Vous pouvez aussi nous contacter via{' '}
+          <a href="mailto:support@contact.com">psg_support@contact.com</a>
+        </p>
       </div>
+      {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <p>Votre message a bien été envoyé !</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
