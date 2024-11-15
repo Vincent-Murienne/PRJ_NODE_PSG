@@ -6,7 +6,7 @@ import { ResultSetHeader, RowDataPacket } from 'mysql2';
 export const getAllClubs = async (req: Request, res: Response): Promise<void> => {
     try {
         const [clubs] = await db.query<RowDataPacket[]>('SELECT * FROM club');
-        res.status(200).json(clubs);
+        res.status(200).json(clubs.shift());
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Erreur lors de la récupération des clubs.' });
