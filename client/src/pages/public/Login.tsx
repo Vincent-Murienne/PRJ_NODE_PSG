@@ -56,7 +56,7 @@ const Login: React.FC = () => {
       <h2 className="login-title">Connexion</h2>
       <LoginForm onSubmit={onSubmit} />
       <p className="message">{message}</p>
-    </div>
+    </div>  
   );
 };
 

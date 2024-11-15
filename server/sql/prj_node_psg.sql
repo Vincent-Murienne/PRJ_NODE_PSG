@@ -69,21 +69,6 @@ CREATE TABLE `club` (
 INSERT INTO `club` (`id_club`, `presentation`, `histoire`) VALUES
 (1, 'Club de football professionnel basé à Paris.', 'Le Paris Saint-Germain Football Club, couramment appelé Paris Saint-Germain ou PSG, est un club de football français, section football du Paris Saint-Germain omnisports. Le club possède un centre à entraînement à Poissy (qui a remplacé à partir de 2023 le Camp des Loges en forêt de Saint-Germain-en-Laye) et joue au Parc des Princes à Paris. Le Paris Saint-Germain voit le jour en 1970 lors de la fusion entre la section football du Stade saint-germanois, club fondé en 1904, et le Paris FC, club virtuel sans stade ni équipe créé dix-huit mois auparavant dans le but de redonner une équipe professionnelle à la capitale, après la chute du Racing Club de France et du Stade français. En 1972, le club est scindé en deux : le Paris FC gardant un effectif et le statut professionnel, ainsi occupant le Parc des Princes, tandis que le Paris Saint-Germain repart avec une équipe amateur en Division 3 et prend alors domicile au stade Georges-Lefèvre. Deux ans après, en 1974, le Paris FC est relégué en deuxième division tandis que le PSG retrouve la première division et le Parc des Princes. Présidé au cours de ses premières années par des personnalités comme Daniel Hechter puis Francis Borelli, le PSG est racheté en 1991 par le diffuseur du championnat à la télévision, Canal+, qui mène le club parisien à un grand succès pendant ses premières années. Ainsi, en 1996, le PSG remporte la Coupe Europe des vainqueurs de coupe, devenant le second club français à gagner une coupe Europe. En 2006, le PSG est vendu au fonds avec investissement américain Colony Capital, vivant plusieurs saisons compliquées malgré deux coupes nationales remportées, puis en 2011 à Qatar Sports Investments (QSI), la filiale sportive du fonds souverain qatarien Qatar Investment Authority (QIA). Un homme affaires et ex-tennisman qatarien Nasser Al-Khelaïfi devenant le président-directeur général du club, QSI investis des moyens financiers très importants pour acheter des joueurs parmi les plus chers au monde, tels que le suédois Zlatan Ibrahimović, le brésilien Neymar, le français Kylian Mbappé en 2017 ou Lionel Messi en 2021. Le PSG devient alors un club avec une dimension mondiale. En 2015, le club réalise le premier « quadruplé » en remportant la Ligue 1, la Coupe de France, la Coupe de la Ligue et le Trophée des champions, performance rééditée en 2016, 2018 et 2020. Le club de la capitale atteint la finale de la Ligue des champions de UEFA lors de la saison 2019-2020. En 2023, le Paris Saint-Germain remporte son onzième titre de champion de France, devenant ainsi le club le plus titré du championnat, devant Saint-Étienne.');
 
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
--- Hôte : 127.0.0.1
--- Généré le : mar. 15 oct. 2024 à 13:57
--- Version du serveur : 10.4.32-MariaDB
--- Version de PHP : 8.2.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-CREATE DATABASE prj_node_psg;
-USE `prj_node_psg`;
-
 -- Table `section` (création avant table `duel`)
 CREATE TABLE `section` (
   `id_section` int(11) NOT NULL AUTO_INCREMENT,
