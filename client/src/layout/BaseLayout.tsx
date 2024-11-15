@@ -37,7 +37,7 @@ const BaseLayout = () => {
                         {/* Liens vers les pages publiques */}
                         <li><NavLink to="/" end>Accueil</NavLink></li>
                         <li><NavLink to="/presentation-club">Présentation du Club</NavLink></li>
-                        <li><NavLink to="/sections">Sections</NavLink></li>
+                        <li><NavLink to="/sectionHome">Sections</NavLink></li>
                         <li><NavLink to="/actualites">Actualités</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
                         <li><NavLink to="/mentions-legales">Mentions Légales</NavLink></li>
@@ -46,11 +46,6 @@ const BaseLayout = () => {
                         {isAuthenticated && (
                             <>
                                 <li><NavLink to="/admin/">Admin Accueil</NavLink></li>
-                                <li><NavLink to="/admin/club">Gestion du Club</NavLink></li>
-                                <li><NavLink to="/admin/actualite">Gestion des Actualités</NavLink></li>
-                                <li><NavLink to="/admin/partenaire">Gestion des Partenaires</NavLink></li>
-                                <li><NavLink to="/admin/match">Gestion des Matchs</NavLink></li>
-                                <li><NavLink to="/admin/activation-compte">Activation des Comptes</NavLink></li>
                             </>
                         )}
 

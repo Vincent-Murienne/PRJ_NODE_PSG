@@ -37,7 +37,12 @@ nav ul li button {
     border: none;
     background: none;
     cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    display: inline-flex; 
+    align-items: center;  
 }
+
 
 nav ul li a:hover,
 nav ul li button:hover {

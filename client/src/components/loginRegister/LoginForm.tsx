@@ -18,6 +18,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
   } = useForm<ILoginFormInputs>();
 
   return (
+    <>
     <form onSubmit={handleSubmit(onSubmit)} className="form-group">
       <input
         type="email"
@@ -42,7 +43,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit }) => {
         Se connecter
       </button>
     </form>
+    <br />
+    </>
   );
+
 };
 
 export default LoginForm;

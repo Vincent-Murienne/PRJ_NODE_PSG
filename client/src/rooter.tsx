@@ -22,7 +22,8 @@ import AdminPartenaires from './pages/admin/AdminPartenaires';
 import AdminMatchs from './pages/admin/AdminMatchs';
 import AdminActivationCompte from './pages/admin/AdminActivationCompte';
 import BaseLayout from './layout/BaseLayout';
-import Section from './pages/public/Section';
+import Section from './pages/public/SectionHome';
+import SectionHome from './pages/public/SectionHome';
 
 // Fonction de vérification d'authentification
 const isAuthenticated = () => {
@@ -47,7 +48,7 @@ createRoot(document.getElementById('root')!).render(
         <Route element={<BaseLayout />}>
           <Route path="/" element={<Accueil />} />
           <Route path="/presentation-club" element={<PresentationClub />} />
-          <Route path="/sections" element={<Section />} />
+          <Route path="/sectionHome" element={<SectionHome />} />
           <Route path="/section-masculine-junior" element={<MasculineJunior />} />
           <Route path="/section-masculine-senior" element={<MasculineSenior />} />
           <Route path="/section-feminine-junior" element={<FeminineJunior />} />
