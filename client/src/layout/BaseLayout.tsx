@@ -1,35 +1,26 @@
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react"; // Importation de useState et useEffect
+import { Outlet, NavLink } from "react-router-dom";
+import { useState } from "react"; 
 import '../assets/css/baseLayout.css';
 
 const BaseLayout = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false); // État pour contrôler l'ouverture du menu
-    const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('token'))); // Suivi de l'authentification
-    const navigate = useNavigate(); // Utilisation de useNavigate pour rediriger après la déconnexion
+    const [isMenuOpen, setIsMenuOpen] = useState(false); 
+    const [isAuthenticated, setIsAuthenticated] = useState(Boolean(localStorage.getItem('token'))); 
 
-    // Fonction pour basculer l'état du menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    // Met à jour l'état d'authentification à chaque changement dans localStorage
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token);
-    }, []); // Le tableau vide garantit que l'effet ne se produit qu'une seule fois
-
-    // Fonction de déconnexion
+    // Fonction pour gérer la déconnexion
     const handleLogout = () => {
         localStorage.removeItem('token');
-        setIsAuthenticated(false); // Mise à jour de l'état immédiatement
-        navigate('/login'); // Redirection vers la page de connexion
+        setIsAuthenticated(false); 
+        window.location.href = '/login';
     };
 
     return (
         <>
             <nav>
                 <div className="navbar-container">
-                    {/* Bouton hamburger */}
                     <button className="hamburger" onClick={toggleMenu}>
                         ☰
                     </button>
@@ -41,23 +32,23 @@ const BaseLayout = () => {
                         <li><NavLink to="/actualites">Actualités</NavLink></li>
                         <li><NavLink to="/contact">Contact</NavLink></li>
                         <li><NavLink to="/mentions-legales">Mentions Légales</NavLink></li>
+                        
+                        {/* Lien d'inscription uniquement si l'utilisateur n'est pas connecté */}
+                        {!isAuthenticated && (
+                            <li><NavLink to="/register">Inscription</NavLink></li>
+                        )}
 
                         {/* Si l'utilisateur est connecté, afficher les liens d'administration */}
                         {isAuthenticated && (
-                            <>
-                                <li><NavLink to="/admin/">Admin Accueil</NavLink></li>
-                            </>
+                            <li><NavLink to="/admin/">Admin Accueil</NavLink></li>
                         )}
 
                         {/* Lien de connexion ou de déconnexion selon l'état d'authentification */}
                         <li>
                             {isAuthenticated ? (
-                                <button className="nav-button" onClick={handleLogout}>Déconnexion</button>
+                                <button onClick={handleLogout}>Déconnexion</button>
                             ) : (
-                                <>
-                                    <NavLink to="/login" className="nav-button">Connexion</NavLink>
-                                    <NavLink to="/register" className="nav-button">Inscription</NavLink>
-                                </>
+                                <NavLink to="/login">Connexion</NavLink>
                             )}
                         </li>
                     </ul>
