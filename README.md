@@ -46,6 +46,26 @@ show tables;
 show columns from <nom_table>;
 ```
 
+## Démarrer l'API
+
+- Se connecter au containeur 'server'
+```sql
+npm start
+```
+
+## Démarrer l'Application Web
+
+- Se connecter au containeur 'client'
+```sql
+npm run dev
+```
+
+## Démarrer l'Application Mobile
+
+```sql
+flutter run
+```
+
 ## Étapes à suivre pour la gestion des comptes
 
 Avoir un compte Administrateur :
