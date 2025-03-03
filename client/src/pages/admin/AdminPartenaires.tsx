@@ -33,7 +33,7 @@ const AdminPartenaires: React.FC = () => {
   const onSubmit: SubmitHandler<Partenaire> = (data) => {
     let url = `${import.meta.env.VITE_API_URL}/partenaires`;
     let method: "POST" | "PUT" | "DELETE" = "POST";
-    let headers: { [key: string]: string } = {
+    const headers: { [key: string]: string } = {
       "Content-Type": "application/json",
     };
   
@@ -65,7 +65,21 @@ const AdminPartenaires: React.FC = () => {
         // Recharger la liste des partenaires
         fetch(`${import.meta.env.VITE_API_URL}/partenaires`)
           .then((response) => response.json())
-          .then((data) => setPartenaires(data));
+          .then((data) => {
+            // Mettre à jour localement les partenaires
+            setPartenaires((prevPartenaires) => {
+              if (formType === "add") {
+                return [...prevPartenaires, data];
+              } else if (formType === "edit") {
+                return prevPartenaires.map((partenaire) =>
+                  partenaire.id_partenaire === data.id_partenaire ? data : partenaire
+                );
+              } else if (formType === "delete") {
+                return prevPartenaires.filter((partenaire) => partenaire.id_partenaire !== data.id_partenaire);
+              }
+              return prevPartenaires;
+            });
+          });
       })
       .catch((error) => console.error("Erreur lors de la soumission:", error));
   };
