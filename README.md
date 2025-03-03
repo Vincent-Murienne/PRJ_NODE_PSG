@@ -48,20 +48,21 @@ show columns from <nom_table>;
 
 ## Démarrer l'API
 
-- Se connecter au containeur 'server'
+Se connecter au containeur 'server'
 ```sql
 npm start
 ```
 
 ## Démarrer l'Application Web
 
-- Se connecter au containeur 'client'
+Se connecter au containeur 'client'
 ```sql
 npm run dev
 ```
 
 ## Démarrer l'Application Mobile
 
+Dans le dossier mobile
 ```sql
 flutter run
 ```
