@@ -53,6 +53,7 @@ class _BaseLayoutState extends State<BaseLayout> {
           isAuthenticated
               ? BottomNavigationBarItem(icon: Icon(Icons.logout), label: "Déconnexion")
               : BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Connexion"),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favoris"),
         ],
       ),
     );
@@ -63,6 +64,7 @@ class _BaseLayoutState extends State<BaseLayout> {
     if (location == "/actualites") return 1;
     if (location == "/mentions-legales") return 2;
     if (location == "/login") return 3;
+    if (location == "/favoris") return 4;
     return 0;
   }
 
@@ -83,6 +85,9 @@ class _BaseLayoutState extends State<BaseLayout> {
           break;
         case 2:
           context.go('/mentions-legales');
+          break;
+        case 4:
+          context.go('/favoris');
           break;
       }
     }

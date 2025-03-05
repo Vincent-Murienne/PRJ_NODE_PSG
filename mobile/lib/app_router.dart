@@ -54,6 +54,10 @@ class AppRouter {
           path: '/section-feminine-senior', 
           builder: (context, state) => BaseLayout(child: FeminineSenior()) // Ajout du BaseLayout
         ),
+        GoRoute(
+          path: '/favoris', 
+          builder: (context, state) => BaseLayout(child: Favoris()) // Ajout du BaseLayout
+        ),
       ],
     );
   }

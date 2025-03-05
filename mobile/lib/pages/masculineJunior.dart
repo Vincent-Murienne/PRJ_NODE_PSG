@@ -46,7 +46,7 @@ class _MasculineJuniorState extends State<MasculineJunior> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Masculine Junior')),
+      appBar: AppBar(title: const Text('Masculine Juniorrrrr')),
       body: FutureBuilder(
         future: futureMatches,
         builder: (context, snapshot) {
