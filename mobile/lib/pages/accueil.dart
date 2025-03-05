@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:go_router/go_router.dart';
 import '../config/environment.dart';
+import 'package:expandable/expandable.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -44,111 +47,173 @@ class _AccueilPageState extends State<Accueil> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Accueil')),
       body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FutureBuilder<Map<String, dynamic>>(
-              future: fetchClubData(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
-                } else {
-                  final clubData = snapshot.data!;
-                  return Column(
-                    children: [
-                      Text('Présentation du Club', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                      Image.network('https://upload.wikimedia.org/wikipedia/fr/thumb/f/ff/Logo_Paris_Saint-Germain_2024.svg/langfr-195px-Logo_Paris_Saint-Germain_2024.svg.png', height: 100),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(clubData['presentation'] ?? 'Aucune présentation disponible', textAlign: TextAlign.center),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(clubData['histoire'] ?? 'Aucune histoire disponible', textAlign: TextAlign.center),
-                      ),
-                    ],
-                  );
-                }
-              },
-            ),
-            FutureBuilder<List<dynamic>>(
-              future: fetchActualites(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
-                } else {
-                  return Column(
-                    children: snapshot.data!.map((actualite) {
-                      return ListTile(
-                        title: Text(actualite['titre']),
-                        subtitle: Text(actualite['resume']),
-                      );
-                    }).toList(),
-                  );
-                }
-              },
-            ),
-            FutureBuilder<List<dynamic>>(
-              future: fetchPartenaires(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
-                } else {
-                  return Column(
-                    children: snapshot.data!.map((partenaire) {
-                      return ListTile(
-                        title: Text(partenaire['url']),
-                        leading: Image.network(partenaire['logo']),
-                      );
-                    }).toList(),
-                  );
-                }
-              },
-            ),
-            SizedBox(height: 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Text(
-                'Sections',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              FutureBuilder<Map<String, dynamic>>(
+                future: fetchClubData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Text('Erreur: ${snapshot.error}');
+                  } else {
+                    final clubData = snapshot.data!;
+                    return Column(
+                      children: [
+                        Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          elevation: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              children: [
+                                Text('Présentation du Club', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                                const SizedBox(height: 10),
+                                Image.network(
+                                  'https://upload.wikimedia.org/wikipedia/fr/thumb/f/ff/Logo_Paris_Saint-Germain_2024.svg/langfr-195px-Logo_Paris_Saint-Germain_2024.svg.png',
+                                  height: 100,
+                                ),
+                                const SizedBox(height: 10),
+                                Text(clubData['presentation'] ?? 'Aucune présentation disponible', softWrap: true),
+                                const SizedBox(height: 10),
+                                ExpandableText(clubData['histoire'] ?? 'Aucune histoire disponible'),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+                },
+              ),
+            const SizedBox(height: 30),
+            Center(
+              child: Column(
+                children: [
+                  SectionButton('Section Masculine Junior', '/section-masculine-junior'),
+                  SectionButton('Section Masculine Senior', '/section-masculine-senior'),
+                  SectionButton('Section Féminine Junior', '/section-feminine-junior'),
+                  SectionButton('Section Féminine Senior', '/section-feminine-senior'),
+                ],
               ),
             ),
-            Column(
-              children: [
-                _buildSectionButton(context, 'Section Masculine Junior', '/section-masculine-junior'),
-                _buildSectionButton(context, 'Section Masculine Senior', '/section-masculine-senior'),
-                _buildSectionButton(context, 'Section Feminine Junior', '/section-feminine-junior'),
-                _buildSectionButton(context, 'Section Feminine Senior', '/section-feminine-senior'),
-              ],
-            ),
+            FutureBuilder<List<dynamic>>(
+            future: fetchPartenaires(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Text('Erreur: ${snapshot.error}');
+              } else {
+                return Column(
+                  children: snapshot.data!.map((partenaire) {
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10), // Espacement entre les éléments
+                      child: InkWell(
+                        onTap: () async {
+                          final Uri url = Uri.parse(partenaire['url']);
+                          try {
+                            if (await canLaunchUrl(url)) {
+                              await launchUrl(url, mode: LaunchMode.externalApplication);
+                            } else {
+                              print('Impossible d\'ouvrir l\'URL: $url');
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Impossible d\'ouvrir l\'URL'))
+                              );
+                            }
+                          } catch (e) {
+                            print('Erreur lors de l\'ouverture de l\'URL: $e');
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Erreur lors de l\'ouverture de l\'URL'))
+                            );
+                          }
+                        },
+                        child: Column(
+                          children: [
+                            Center(  // Centrer l'image
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10), // Coins arrondis pour l'image
+                                child: Image.network(
+                                  partenaire['logo'],
+                                  width: 100, // Taille de l'image
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 5), // Espacement entre l'image et le texte (facultatif)
+                            Text(
+                              partenaire['nom'] ?? '', // Affiche le nom du partenaire
+                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }).toList(),
+                );
+              }
+            },
+          ),
           ],
         ),
       ),
+    ),
     );
   }
+}
 
-  Widget _buildSectionButton(BuildContext context, String label, String route) {
+class SectionButton extends StatefulWidget {
+  final String title;
+  final String route;
+
+  const SectionButton(this.title, this.route, {super.key});
+
+  @override
+  _SectionButtonState createState() => _SectionButtonState();
+}
+
+class _SectionButtonState extends State<SectionButton> {
+  bool _isClicked = false;
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10.0),
       child: ElevatedButton(
-        onPressed: () {
-          context.go(route);
-        },
-        child: Text(label),
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-          textStyle: TextStyle(fontSize: 16),
+          backgroundColor: _isClicked ? Colors.blueGrey : Colors.blue,
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
         ),
+        onPressed: () {
+          setState(() {
+            _isClicked = !_isClicked; // Change la couleur au clic
+          });
+          context.go(widget.route);
+        },
+        child: Text(widget.title, style: const TextStyle(color: Colors.white)),
       ),
+    );
+  }
+}
+
+class ExpandableText extends StatelessWidget {
+  final String text;
+
+  const ExpandableText(this.text, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ExpandablePanel(
+      header: const Text("Lire plus", style: TextStyle(fontWeight: FontWeight.bold)),
+      collapsed: Text(text, softWrap: true, maxLines: 3, overflow: TextOverflow.ellipsis),
+      expanded: Text(text, softWrap: true),
     );
   }
 }
