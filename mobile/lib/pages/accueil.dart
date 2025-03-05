@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:go_router/go_router.dart';
+import '../config/environment.dart';
 
 class Match {
   final int idMatch;
@@ -34,7 +36,17 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilPageState extends State<Accueil> {
-  final String apiUrl = 'http://localhost:8080/api';
+  final String apiUrl = Environment.apiUrl;
+
+  Future<Map<String, dynamic>> fetchClubData() async {
+    final response = await http.get(Uri.parse('$apiUrl/clubs'));
+    if (response.statusCode == 200) {
+      return json.decode(response.body);
+    } else {
+      throw Exception('Erreur lors du chargement des informations du club');
+    }
+  }
+
   String? featuredSectionId;  // Utilisation de l'ID de la section
 
   @override
@@ -64,8 +76,7 @@ class _AccueilPageState extends State<Accueil> {
       throw Exception('Erreur lors du chargement des matchs');
     }
   }
-
-  // Charger les actualités
+  
   Future<List<dynamic>> fetchActualites() async {
     final response = await http.get(Uri.parse('$apiUrl/three-last-actualites'));
     if (response.statusCode == 200) {
@@ -84,7 +95,7 @@ class _AccueilPageState extends State<Accueil> {
       throw Exception('Erreur lors du chargement des partenaires');
     }
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,40 +104,64 @@ class _AccueilPageState extends State<Accueil> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Affichage de la section "à la une"
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'Section à la une : ${featuredSectionId ?? "Aucune section sélectionnée"}',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ),
+            //             // Affichage de la section "à la une"
+            // Padding(
+            //   padding: const EdgeInsets.all(16.0),
+            //   child: Text(
+            //     'Section à la une : ${featuredSectionId ?? "Aucune section sélectionnée"}',
+            //     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            //   ),
+            // ),
 
-            FutureBuilder<List<Match>>(
-              future: fetchDerniersMatchs(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Text('Erreur: ${snapshot.error}');
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('Aucun match disponible.'));
-                } else {
-                  List<Match> matches = snapshot.data!;
+            // FutureBuilder<List<Match>>(
+            //   future: fetchDerniersMatchs(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.connectionState == ConnectionState.waiting) {
+            //       return const Center(child: CircularProgressIndicator());
+            //     } else if (snapshot.hasError) {
+            //       return Text('Erreur: ${snapshot.error}');
+            //     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            //       return const Center(child: Text('Aucun match disponible.'));
+            //     } else {
+            //       List<Match> matches = snapshot.data!;
 
-                  return Column(
-                    children: matches.map((match) {
-                      return ListTile(
-                        title: Text(match.nomAdversaire),
-                        subtitle: Text('${match.dateMatch.toLocal()} - ${match.lieuMatch}'),
-                      );
-                    }).toList(),
-                  );
-                }
-              },
-            ),
-
-            // Actualités
+            //       return Column(
+            //         children: matches.map((match) {
+            //           return ListTile(
+            //             title: Text(match.nomAdversaire),
+            //             subtitle: Text('${match.dateMatch.toLocal()} - ${match.lieuMatch}'),
+            //           );
+            //         }).toList(),
+            //       );
+            //     }
+            //   },
+            // ),
+            // FutureBuilder<Map<String, dynamic>>(
+            //   future: fetchClubData(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.connectionState == ConnectionState.waiting) {
+            //       return const Center(child: CircularProgressIndicator());
+            //     } else if (snapshot.hasError) {
+            //       return Text('Erreur: ${snapshot.error}');
+            //     } else {
+            //       final clubData = snapshot.data!;
+            //       return Column(
+            //         children: [
+            //           Text('Présentation du Club', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            //           Image.network('https://upload.wikimedia.org/wikipedia/fr/thumb/f/ff/Logo_Paris_Saint-Germain_2024.svg/langfr-195px-Logo_Paris_Saint-Germain_2024.svg.png', height: 100),
+            //           Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Text(clubData['presentation'] ?? 'Aucune présentation disponible', textAlign: TextAlign.center),
+            //           ),
+            //           Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: Text(clubData['histoire'] ?? 'Aucune histoire disponible', textAlign: TextAlign.center),
+            //           ),
+            //         ],
+            //       );
+            //     }
+            //   },
+            // ),
             FutureBuilder<List<dynamic>>(
               future: fetchActualites(),
               builder: (context, snapshot) {
@@ -146,8 +181,6 @@ class _AccueilPageState extends State<Accueil> {
                 }
               },
             ),
-
-            // Partenaires
             FutureBuilder<List<dynamic>>(
               future: fetchPartenaires(),
               builder: (context, snapshot) {
@@ -170,7 +203,40 @@ class _AccueilPageState extends State<Accueil> {
                 }
               },
             ),
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Text(
+                'Sections',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Column(
+              children: [
+                _buildSectionButton(context, 'Section Masculine Junior', '/section-masculine-junior'),
+                _buildSectionButton(context, 'Section Masculine Senior', '/section-masculine-senior'),
+                _buildSectionButton(context, 'Section Feminine Junior', '/section-feminine-junior'),
+                _buildSectionButton(context, 'Section Feminine Senior', '/section-feminine-senior'),
+              ],
+            ),
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildSectionButton(BuildContext context, String label, String route) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: ElevatedButton(
+        onPressed: () {
+          context.go(route);
+        },
+        child: Text(label),
+        style: ElevatedButton.styleFrom(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          textStyle: TextStyle(fontSize: 16),
         ),
       ),
     );
