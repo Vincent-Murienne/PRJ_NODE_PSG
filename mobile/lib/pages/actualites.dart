@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
+import '../config/environment.dart';
 class Actualite {
   final int idActualite;
   final String titre;
@@ -50,9 +50,7 @@ class ActualitesPageState extends State<ActualitesPage> {
 
   Future<void> fetchActualites() async {
     try {
-      final response =
-          await http.get(Uri.parse('http://localhost:8080/api/actualites'));
-
+      final response = await http.get(Uri.parse('${Environment.apiUrl}/actualites'));
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         setState(() {

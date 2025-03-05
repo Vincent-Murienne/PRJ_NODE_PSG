@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import '../config/environment.dart';
 
 class Accueil extends StatefulWidget {
   const Accueil({super.key});
@@ -10,7 +11,7 @@ class Accueil extends StatefulWidget {
 }
 
 class _AccueilPageState extends State<Accueil> {
-  final String apiUrl = 'http://localhost:8080/api'; // Remplace avec ton URL
+  final String apiUrl = Environment.apiUrl;
 
   Future<List<dynamic>> fetchActualites() async {
     final response = await http.get(Uri.parse('$apiUrl/three-last-actualites'));

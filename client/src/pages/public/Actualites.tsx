@@ -13,11 +13,12 @@ interface Actualite {
 const Actualites: React.FC = () => {
   const [actualites, setActualites] = useState<Actualite[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const apiURL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const fetchActualites = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/actualites');
+        const response = await fetch(`${apiURL}/actualites`);
         if (!response.ok) {
           throw new Error(`Erreur HTTP : ${response.status}`);
         }
