@@ -48,8 +48,6 @@ class _BaseLayoutState extends State<BaseLayout> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Accueil"),
-          BottomNavigationBarItem(icon: Icon(Icons.info), label: "Présentation"),
-          BottomNavigationBarItem(icon: Icon(Icons.access_alarm_sharp), label: "Sections"),
           BottomNavigationBarItem(icon: Icon(Icons.article), label: "Actualités"),
           BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: "Mentions légales"),
           isAuthenticated
@@ -62,16 +60,14 @@ class _BaseLayoutState extends State<BaseLayout> {
 
   int _getSelectedIndex(BuildContext context) {
     final location = GoRouter.of(context).routeInformationProvider.value.uri.toString();
-    if (location == "/presentation-club") return 1;
-    if (location == "/sectionHome") return 2;
-    if (location == "/actualites") return 3;
-    if (location == "/mentions-legales") return 4;
-    if (location == "/login") return 5;
+    if (location == "/actualites") return 1;
+    if (location == "/mentions-legales") return 2;
+    if (location == "/login") return 3;
     return 0;
   }
 
   void _onItemTapped(BuildContext context, int index) {
-    if (index == 5) {
+    if (index == 3) {
       if (isAuthenticated) {
         _logout();
       } else {
@@ -83,15 +79,9 @@ class _BaseLayoutState extends State<BaseLayout> {
           context.go('/');
           break;
         case 1:
-          context.go('/presentation-club');
-          break;
-        case 2:
-          context.go('/sectionHome');
-          break;
-        case 3:
           context.go('/actualites');
           break;
-        case 4:
+        case 2:
           context.go('/mentions-legales');
           break;
       }

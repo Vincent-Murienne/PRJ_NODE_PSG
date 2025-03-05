@@ -60,7 +60,7 @@ class ActualitesPageState extends State<ActualitesPage> {
         throw Exception('Erreur HTTP: ${response.statusCode}');
       }
     } catch (error) {
-      //print("Erreur lors de la récupération des actualités: $error");
+      // print("Erreur lors de la récupération des actualités: $error");
     } finally {
       setState(() {
         loading = false;
@@ -73,78 +73,82 @@ class ActualitesPageState extends State<ActualitesPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Actualités'),
-        centerTitle: true, // Centre le titre de l'AppBar
+        centerTitle: true,
       ),
       body: loading
           ? const Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: actualites.length,
-              itemBuilder: (context, index) {
-                final actualite = actualites[index];
-                return Card(
-                  margin: const EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  elevation: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center, // Centre horizontalement
-                      crossAxisAlignment: CrossAxisAlignment.center, // Centre verticalement
-                      children: [
-                        // Image à gauche
-                        actualite.image.isNotEmpty
-                            ? ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  actualite.image,
-                                  height: 100,
-                                  width: 100,
-                                  fit: BoxFit.cover,
-                                ),
-                              )
-                            : const SizedBox(width: 100, height: 100),
-
-                        const SizedBox(width: 10), // Espacement entre image et texte
-
-                        // Texte à droite
-                        Expanded(
-                          flex: 2, // Permet au texte de prendre plus d'espace
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center, // Centre le texte dans la colonne
-                            crossAxisAlignment: CrossAxisAlignment.center, // Centre chaque élément
-                            children: [
-                              Text(
-                                actualite.titre,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                                textAlign: TextAlign.center,
+          : Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 100),
+              child: Column(
+                children: [
+                  const SizedBox(height: 30), // Ajout d’un espace sous le titre
+                  Expanded(
+                    child: GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // 2 éléments par ligne
+                        crossAxisSpacing: 10, // Espacement horizontal réduit
+                        mainAxisSpacing: 10, // Espacement vertical réduit
+                        mainAxisExtent: 220, // Hauteur réduite des cartes
+                      ),
+                      itemCount: actualites.length,
+                      itemBuilder: (context, index) {
+                        final actualite = actualites[index];
+                        return Center(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            elevation: 3, // Légère ombre
+                            child: Padding(
+                              padding: const EdgeInsets.all(10), // Réduction du padding
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  actualite.image.isNotEmpty
+                                      ? ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Image.network(
+                                            actualite.image,
+                                            height: 80, // Réduction de l’image
+                                            width: 80,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      : const SizedBox(width: 80, height: 80),
+                                  const SizedBox(height: 8), // Moins d’espace sous l’image
+                                  Text(
+                                    actualite.titre,
+                                    style: const TextStyle(
+                                        fontSize: 16, fontWeight: FontWeight.bold),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    DateTime.parse(actualite.date)
+                                        .toLocal()
+                                        .toString(),
+                                    style: const TextStyle(
+                                        fontSize: 12, color: Colors.grey),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 6),
+                                  Text(
+                                    actualite.resume,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(height: 5),
-                              Text(
-                                DateTime.parse(actualite.date)
-                                    .toLocal()
-                                    .toString(),
-                                style: const TextStyle(
-                                    fontSize: 12, color: Colors.grey),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 10),
-                              Text(
-                                actualite.resume,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                                textAlign: TextAlign.center,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
+                        );
+                      },
                     ),
                   ),
-                );
-              },
+                ],
+              ),
             ),
     );
   }
