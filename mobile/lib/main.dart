@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
         // Personnalisation du thème
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: Colors.black, // Fond noir
-          selectedItemColor: Colors.white, // Icône sélectionnée en blanc
-          unselectedItemColor: Colors.grey, // Icône non sélectionnée en gris
-          selectedLabelStyle: TextStyle(color: Colors.white), // Texte sélectionné en blanc
-          unselectedLabelStyle: TextStyle(color: Colors.grey), // Texte non sélectionné en gris
+          selectedItemColor: Colors.blue, // Icône sélectionnée en bleu
+          unselectedItemColor: Colors.blueGrey, // Icône non sélectionnée en bleu/gris
+          selectedLabelStyle: TextStyle(color: Colors.blue), // Texte sélectionné en bleu
+          unselectedLabelStyle: TextStyle(color: Colors.blueGrey), // Texte non sélectionné en bleu/gris
         ),
       ),
     );
