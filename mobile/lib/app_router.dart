@@ -80,7 +80,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(path: '/', builder: (context, state) => Accueil()),
         GoRoute(path: '/presentation-club', builder: (context, state) => PresentationClub()),
         GoRoute(path: '/sectionHome', builder: (context, state) => Sections()),
-        GoRoute(path: '/actualites', builder: (context, state) => Actualites()),
+        GoRoute(path: '/actualites', builder: (context, state) =>  ActualitesPage()),
         GoRoute(path: '/mentions-legales', builder: (context, state) => MentionsLegales()),
         GoRoute(path: '/login', builder: (context, state) => Login()),
       ],
