@@ -3,12 +3,10 @@ import 'package:go_router/go_router.dart';
 
 // Import des pages
 import 'pages/accueil.dart';
-import 'pages/presentation-club.dart';
-import 'pages/sectionHome.dart';
-// import 'pages/section-masculine-junior.dart';
-// import 'pages/section-masculine-senior.dart';
-// import 'pages/section-feminine-junior.dart';
-// import 'pages/section-feminine-senior.dart';
+import 'pages/masculineJunior.dart';
+import 'pages/masculineSenior.dart';
+import 'pages/feminineSenior.dart';
+import 'pages/feminineJunior.dart';
 import 'pages/actualites.dart';
 import 'pages/login.dart';
 import 'pages/mentions-legales.dart';
@@ -26,8 +24,6 @@ class BaseLayout extends StatelessWidget {
         onTap: (index) => _onItemTapped(context, index),
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Accueil"),
-          BottomNavigationBarItem(icon: Icon(Icons.info), label: "Présentation"),
-          BottomNavigationBarItem(icon: Icon(Icons.access_alarm_sharp), label: "Sections"),
           BottomNavigationBarItem(icon: Icon(Icons.article), label: "Actualités"),
           BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: "Mentions légales"),
           BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Connexion"),
@@ -38,11 +34,9 @@ class BaseLayout extends StatelessWidget {
 
   int _getSelectedIndex(BuildContext context) {
     final location = GoRouter.of(context).routeInformationProvider.value.uri.toString();
-    if (location == "/presentation-club") return 1;
-    if (location == "/sectionHome") return 2;
-    if (location == "/actualites") return 3;
-    if (location == "/mentions-legales") return 4;
-    if (location == "/login") return 5;
+    if (location == "/actualites") return 1;
+    if (location == "/mentions-legales") return 2;
+    if (location == "/login") return 2;
     return 0;
   }
 
@@ -52,18 +46,12 @@ class BaseLayout extends StatelessWidget {
         context.go('/');
         break;
       case 1:
-        context.go('/presentation-club');
-        break;
-      case 2:
-        context.go('/sectionHome');
-        break;
-      case 3:
         context.go('/actualites');
         break;
-      case 4:
+      case 2:
         context.go('/mentions-legales');
         break;
-      case 5:
+      case 3:
         context.go('/login');
         break;
     }
@@ -78,11 +66,13 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state, child) => BaseLayout(child: child), // Ajout du builder
       routes: [
         GoRoute(path: '/', builder: (context, state) => Accueil()),
-        GoRoute(path: '/presentation-club', builder: (context, state) => PresentationClub()),
-        GoRoute(path: '/sectionHome', builder: (context, state) => Sections()),
-        GoRoute(path: '/actualites', builder: (context, state) => Actualites()),
+        GoRoute(path: '/actualites', builder: (context, state) => ActualitesPage()),
         GoRoute(path: '/mentions-legales', builder: (context, state) => MentionsLegales()),
         GoRoute(path: '/login', builder: (context, state) => Login()),
+        GoRoute(path: '/section-masculine-junior', builder: (context, state) => MasculineJunior()),
+        GoRoute(path: '/section-masculine-senior', builder: (context, state) => MasculineSenior()),
+        GoRoute(path: '/section-feminine-junior', builder: (context, state) => FeminineJunior()),
+        GoRoute(path: '/section-feminine-senior', builder: (context, state) => FeminineSenior()),
       ],
     ),
   ],
