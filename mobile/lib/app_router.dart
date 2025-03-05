@@ -12,6 +12,7 @@ import 'pages/sectionHome.dart';
 import 'pages/actualites.dart';
 import 'pages/login.dart';
 import 'pages/mentions-legales.dart';
+import 'pages/favoris.dart';
 
 class BaseLayout extends StatelessWidget {
   final Widget child;
@@ -31,6 +32,8 @@ class BaseLayout extends StatelessWidget {
           BottomNavigationBarItem(icon: Icon(Icons.article), label: "Actualités"),
           BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: "Mentions légales"),
           BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Connexion"),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favoris"),
+
         ],
       ),
     );
@@ -43,6 +46,7 @@ class BaseLayout extends StatelessWidget {
     if (location == "/actualites") return 3;
     if (location == "/mentions-legales") return 4;
     if (location == "/login") return 5;
+    if (location == "/favoris") return 6;
     return 0;
   }
 
@@ -66,6 +70,9 @@ class BaseLayout extends StatelessWidget {
       case 5:
         context.go('/login');
         break;
+      case 6:
+       context.go('/favoris');
+        break;
     }
   }
 }
@@ -83,6 +90,7 @@ final GoRouter appRouter = GoRouter(
         GoRoute(path: '/actualites', builder: (context, state) =>  ActualitesPage()),
         GoRoute(path: '/mentions-legales', builder: (context, state) => MentionsLegales()),
         GoRoute(path: '/login', builder: (context, state) => Login()),
+        GoRoute(path: '/favoris', builder: (context, state) => Favoris()),
       ],
     ),
   ],
