@@ -2,36 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../config/environment.dart';
-class Actualite {
-  final int idActualite;
-  final String titre;
-  final String date;
-  final String texteLong;
-  final String resume;
-  final String image;
-
-  Actualite({
-    required this.idActualite,
-    required this.titre,
-    required this.date,
-    required this.texteLong,
-    required this.resume,
-    required this.image,
-  });
-
-  factory Actualite.fromJson(Map<String, dynamic> json) {
-    return Actualite(
-      idActualite: json['id_actualite'],
-      titre: json['titre'],
-      date: json['date'],
-      texteLong: json['texte_long'],
-      resume: json['resume'],
-      image: json['image'].startsWith('http')
-          ? json['image']
-          : '${Environment.apiUrl}${json['image']}',
-    );
-  }
-}
+import '../models/actualite.dart';
 
 class ActualitesPage extends StatefulWidget {
   const ActualitesPage({super.key});
@@ -70,88 +41,98 @@ class ActualitesPageState extends State<ActualitesPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Actualités'),
-        centerTitle: true,
-      ),
-      body: loading
-          ? const Center(child: CircularProgressIndicator())
-          : Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100),
-              child: Column(
-                children: [
-                  const SizedBox(height: 30), // Ajout d’un espace sous le titre
-                  Expanded(
-                    child: GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2, // 2 éléments par ligne
-                        crossAxisSpacing: 10, // Espacement horizontal réduit
-                        mainAxisSpacing: 10, // Espacement vertical réduit
-                        mainAxisExtent: 220, // Hauteur réduite des cartes
-                      ),
-                      itemCount: actualites.length,
-                      itemBuilder: (context, index) {
-                        final actualite = actualites[index];
-                        return Center(
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            elevation: 3, // Légère ombre
-                            child: Padding(
-                              padding: const EdgeInsets.all(10), // Réduction du padding
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  actualite.image.isNotEmpty
-                                      ? ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
-                                          child: Image.network(
-                                            actualite.image,
-                                            height: 80, // Réduction de l’image
-                                            width: 80,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        )
-                                      : const SizedBox(width: 80, height: 80),
-                                  const SizedBox(height: 8), // Moins d’espace sous l’image
-                                  Text(
-                                    actualite.titre,
-                                    style: const TextStyle(
-                                        fontSize: 16, fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    DateTime.parse(actualite.date)
-                                        .toLocal()
-                                        .toString(),
-                                    style: const TextStyle(
-                                        fontSize: 12, color: Colors.grey),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 6),
-                                  Text(
-                                    actualite.resume,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
+ @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Actualités'),
+      centerTitle: true,
+    ),
+    body: loading
+        ? const Center(child: CircularProgressIndicator())
+        : Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                SizedBox(height: 30),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: actualites.length,
+                    itemBuilder: (context, index) {
+                      final actualite = actualites[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        );
-                      },
-                    ),
+                          elevation: 3,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              actualite.image.isNotEmpty
+                                  ? ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15),
+                                      ),
+                                      child: Image.network(
+                                        actualite.image,
+                                        width: double.infinity,
+                                        height: 180, // Hauteur ajustable selon ton besoin
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 180,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[300],
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(15),
+                                          topRight: Radius.circular(15),
+                                        ),
+                                      ),
+                                    ),
+                              Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      actualite.titre,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      DateTime.parse(actualite.date)
+                                          .toLocal()
+                                          .toString(),
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.grey),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      actualite.resume,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-    );
-  }
+          ),
+  );
+}
 }
