@@ -26,7 +26,9 @@ class Actualite {
       date: json['date'],
       texteLong: json['texte_long'],
       resume: json['resume'],
-      image: json['image'],
+      image: json['image'].startsWith('http')
+          ? json['image']
+          : '${Environment.apiUrl}${json['image']}',
     );
   }
 }

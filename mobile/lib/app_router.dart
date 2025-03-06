@@ -4,15 +4,14 @@ import 'layout/base_layout.dart';
 
 // Import des pages
 import 'pages/accueil.dart';
-import 'pages/masculineJunior.dart';
-import 'pages/masculineSenior.dart';
-import 'pages/feminineSenior.dart';
-import 'pages/feminineJunior.dart';
+import 'pages/masculine_junior.dart';
+import 'pages/masculine_senior.dart';
+import 'pages/feminine_senior.dart';
+import 'pages/feminine_junior.dart';
 import 'pages/actualites.dart';
 import 'pages/login.dart';
-import 'pages/mentions-legales.dart';
-
-// Dans app_router.dart
+import 'pages/mentions_legales.dart';
+import 'pages/ajout_actualite.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -39,19 +38,23 @@ class AppRouter {
         ),
         GoRoute(
           path: '/section-masculine-junior', 
-          builder: (context, state) => BaseLayout(child: MasculineJunior()) // Ajout du BaseLayout
+          builder: (context, state) => BaseLayout(child: MasculineJunior())
         ),
         GoRoute(
           path: '/section-masculine-senior', 
-          builder: (context, state) => BaseLayout(child: MasculineSenior()) // Ajout du BaseLayout
+          builder: (context, state) => BaseLayout(child: MasculineSenior())
         ),
         GoRoute(
           path: '/section-feminine-junior', 
-          builder: (context, state) => BaseLayout(child: FeminineJunior()) // Ajout du BaseLayout
+          builder: (context, state) => BaseLayout(child: FeminineJunior())
         ),
         GoRoute(
           path: '/section-feminine-senior', 
-          builder: (context, state) => BaseLayout(child: FeminineSenior()) // Ajout du BaseLayout
+          builder: (context, state) => BaseLayout(child: FeminineSenior())
+        ),
+        GoRoute(
+          path: '/ajout-actualite', 
+          builder: (context, state) => BaseLayout(child: AjoutActualite())
         ),
       ],
     );

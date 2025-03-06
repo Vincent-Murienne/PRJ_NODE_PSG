@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
+import path from 'path';
 import clubRoutes from './routes/clubRoutes';
 import partenaireRoutes from './routes/partenaireRoutes';
 import actualiteRoutes from './routes/actualiteRoutes';
@@ -20,6 +21,8 @@ const port = process.env.PORT || 8080;
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Définir une route de base
 app.get('/', (req, res) => {
@@ -34,6 +37,7 @@ app.use('/api/', adversaireRoutes);
 app.use('/api/', duelRoutes);
 app.use('/api/', userRoutes);
 app.use('/api/', authRoutes);
+app.use('/api/uploads', express.static(path.join(__dirname, '../public/img')));
 
 // Démarrer le serveur
 app.listen(port, () => {
