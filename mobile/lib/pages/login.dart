@@ -71,10 +71,6 @@ class _LoginState extends State<Login> {
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setString('token', token);
 
-        setState(() {
-          _message = 'Connexion réussie.';
-        });
-
         context.go('/'); // Retour à l'accueil après connexion
       }
 
@@ -95,7 +91,6 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Connexion")),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: Center(

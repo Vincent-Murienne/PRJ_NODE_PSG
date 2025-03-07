@@ -50,46 +50,61 @@ class _BaseLayoutState extends State<BaseLayout> {
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Accueil"),
           BottomNavigationBarItem(icon: Icon(Icons.article), label: "Actualités"),
           BottomNavigationBarItem(icon: Icon(Icons.info_outline), label: "Mentions légales"),
-          isAuthenticated
-              ? BottomNavigationBarItem(icon: Icon(Icons.logout), label: "Déconnexion")
-              : BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Connexion"),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favoris"),
+          ...(isAuthenticated
+              ? [
+                  BottomNavigationBarItem(icon: Icon(Icons.add), label: "AjoutActualité"),
+                  BottomNavigationBarItem(icon: Icon(Icons.logout), label: "Déconnexion")
+                ]
+              : [
+                  BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: "Connexion")
+                ]),
         ],
       ),
     );
   }
 
-  int _getSelectedIndex(BuildContext context) {
-    final location = GoRouter.of(context).routeInformationProvider.value.uri.toString();
-    if (location == "/actualites") return 1;
-    if (location == "/mentions-legales") return 2;
-    if (location == "/login") return 3;
-    if (location == "/favoris") return 4;
-    return 0;
+int _getSelectedIndex(BuildContext context) {
+  final location = GoRouter.of(context).routeInformationProvider.value.uri.toString();
+  if (location == "/actualites") return 1;
+  if (location == "/mentions-legales") return 2;
+  if (location == "/favoris") return 3;
+  if (isAuthenticated) {
+    if (location == "/ajout-actualite") return 4;
+    if (location == "/login") return 5; // Déconnexion
+  } else {
+    if (location == "/login") return 4; // Connexion
   }
+  return 0;
+}
 
   void _onItemTapped(BuildContext context, int index) {
-    if (index == 3) {
+  switch (index) {
+    case 0:
+      context.go('/');
+      break;
+    case 1:
+      context.go('/actualites');
+      break;
+    case 2:
+      context.go('/mentions-legales');
+      break;
+    case 3:
+      context.go('/favoris');
+      break;
+    case 4:
       if (isAuthenticated) {
-        _logout();
+        context.go('/ajout-actualite');
       } else {
         context.go('/login');
       }
-    } else {
-      switch (index) {
-        case 0:
-          context.go('/');
-          break;
-        case 1:
-          context.go('/actualites');
-          break;
-        case 2:
-          context.go('/mentions-legales');
-          break;
-        case 4:
-          context.go('/favoris');
-          break;
+      break;
+    case 5:
+      if (isAuthenticated) {
+        _logout();
       }
+      break;
     }
   }
 }
+
