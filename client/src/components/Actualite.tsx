@@ -1,5 +1,7 @@
 import React from 'react';
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 interface ActualiteProps {
   titre: string;
   image: string;
@@ -9,9 +11,10 @@ interface ActualiteProps {
 }
 
 const Actualite: React.FC<ActualiteProps> = ({ titre, image, texte_long, date, resume }) => {
+  const imageUrl = image.startsWith("http") ? image : `${apiURL}${image}`;
   return (
     <div className="actualite">
-      <img src={image} alt={titre} className="actualite-image" />
+      <img src={imageUrl} alt={titre} className="actualite-image" />
       <div className="actualite-contenu">
         <h3>{titre}</h3>
         <p>{new Date(date).toLocaleDateString()}</p>

@@ -93,7 +93,7 @@ class MentionsLegales extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: InkWell(
-        onTap: () {}, // Tu peux utiliser url_launcher ici
+        onTap: () {},
         child: Text(
           text,
           style: const TextStyle(fontSize: 14, color: Colors.blue, decoration: TextDecoration.underline),

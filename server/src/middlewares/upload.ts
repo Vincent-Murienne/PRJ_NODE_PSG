@@ -1,4 +1,3 @@
-// Dans un fichier middlewares/upload.ts ou similaire
 import multer from 'multer';
 import path from 'path';
 
