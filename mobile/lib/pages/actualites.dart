@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../config/environment.dart';
 import '../models/actualite.dart';
+import 'package:intl/intl.dart';
+
 
 class ActualitesPage extends StatefulWidget {
   const ActualitesPage({super.key});
@@ -108,11 +110,8 @@ Widget build(BuildContext context) {
                                     ),
                                     const SizedBox(height: 4),
                                     Text(
-                                      DateTime.parse(actualite.date)
-                                          .toLocal()
-                                          .toString(),
-                                      style: const TextStyle(
-                                          fontSize: 12, color: Colors.grey),
+                                      DateFormat('yyyy-MM-dd').format(DateTime.parse(actualite.date)),
+                                      style: const TextStyle(fontSize: 12, color: Colors.grey),
                                     ),
                                     const SizedBox(height: 6),
                                     Text(

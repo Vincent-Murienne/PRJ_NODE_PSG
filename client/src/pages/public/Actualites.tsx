@@ -23,15 +23,20 @@ const Actualites: React.FC = () => {
           throw new Error(`Erreur HTTP : ${response.status}`);
         }
         const data = await response.json();
-        console.log(data); // Vérifiez si c'est bien un tableau d'actualités
-
-        setActualites(Array.isArray(data) ? data : []);
+    
+        const formattedData = data.map((actualite: Actualite) => ({
+          ...actualite,
+          image: actualite.image.startsWith("http") ? actualite.image : `${apiURL}${actualite.image}`
+        }));
+    
+        setActualites(formattedData);
       } catch (error) {
         console.error("Erreur lors de la récupération des actualités :", error);
       } finally {
         setLoading(false);
       }
     };
+    
 
     fetchActualites();
   }, []);

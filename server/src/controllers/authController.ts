@@ -11,7 +11,7 @@ const simpleCrypto = new SimpleCrypto('votre_cle_secrete');
 // Clé secrète pour JWT
 const JWT_SECRET = 'votre_jwt_secret';
 
-// Durée de validité du jeton (30 secondes)
+// Durée de validité du jeton
 const JWT_EXPIRATION = '3000s';
 
 // Connexion de l'utilisateur

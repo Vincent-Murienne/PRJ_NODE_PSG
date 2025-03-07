@@ -2,6 +2,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:mobile/models/match.dart';
 import 'package:mobile/services/match_service.dart';
+import 'package:intl/intl.dart';
+
 
 class FeminineJunior extends StatefulWidget {
   const FeminineJunior({super.key});
@@ -65,7 +67,7 @@ class _FeminineJuniorState extends State<FeminineJunior> {
                   ...pastMatches.map((match) => ListTile(
                         title: Text('VS ${match.nom_adversaire}'),
                         subtitle: Text(
-                            'Date: ${match.date_match}\nLieu: ${match.lieu_match}\nScore équipe: ${match.score_equipe ?? "N/A"}\nScore adversaire: ${match.score_adversaire ?? "N/A"}'),
+                            'Date: ${DateFormat('yyyy-MM-dd').format(DateTime.parse(match.date_match))}\nLieu: ${match.lieu_match}\nScore équipe: ${match.score_equipe ?? "N/A"}\nScore adversaire: ${match.score_adversaire ?? "N/A"}'),
                       )),
                   const Padding(
                     padding: EdgeInsets.all(8.0),
@@ -73,7 +75,7 @@ class _FeminineJuniorState extends State<FeminineJunior> {
                   ),
                   ...nextMatches.map((match) => ListTile(
                         title: Text('VS ${match.nom_adversaire}'),
-                        subtitle: Text('Date: ${match.date_match}\nLieu: ${match.lieu_match}'),
+                        subtitle: Text('Date: ${DateFormat('yyyy-MM-dd').format(DateTime.parse(match.date_match))}\nLieu: ${match.lieu_match}'),
                       )),
                 ],
               ),

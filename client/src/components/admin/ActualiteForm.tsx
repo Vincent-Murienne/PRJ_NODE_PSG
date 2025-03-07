@@ -4,23 +4,20 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 interface ActualiteFormProps {
   id?: string;
   initialValues?: { titre: string; texte_long: string; resume: string; image: string };
-  onSubmit: (data: { titre: string; texte_long: string; resume: string; image: string }) => void;
+  onSubmit: (data: FormData) => void;
 }
 
-interface FormData {
+interface FormDataFields {
   titre: string;
   texte_long: string;
   resume: string;
-  image: string;
 }
 
-const ActualiteForm: React.FC<ActualiteFormProps> = ({
-  id,
-  initialValues,
-  onSubmit,
-}) => {
-  const { register, handleSubmit, setValue } = useForm<FormData>(); // Utilisation de FormData comme type générique
+const ActualiteForm: React.FC<ActualiteFormProps> = ({ id, initialValues, onSubmit }) => {
+  const { register, handleSubmit, setValue } = useForm<FormDataFields>();
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(initialValues?.image || null);
 
   useEffect(() => {
     if (id && !initialValues) {
@@ -31,14 +28,29 @@ const ActualiteForm: React.FC<ActualiteFormProps> = ({
           setValue('titre', data.titre);
           setValue('texte_long', data.texte_long);
           setValue('resume', data.resume);
-          setValue('image', data.image);
+          setImagePreview(data.image);
           setLoading(false);
         });
     }
   }, [id, initialValues, setValue]);
 
-  const handleFormSubmit: SubmitHandler<FormData> = (data) => {
-    onSubmit(data);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.[0]) {
+      const file = e.target.files[0];
+      setImage(file);
+      setImagePreview(URL.createObjectURL(file)); // Aperçu de l'image
+    }
+  };
+
+  const handleFormSubmit: SubmitHandler<FormDataFields> = (data) => {
+    const formData = new FormData();
+    formData.append('titre', data.titre);
+    formData.append('texte_long', data.texte_long);
+    formData.append('resume', data.resume);
+    if (image) {
+      formData.append('image', image);
+    }
+    onSubmit(formData);
   };
 
   if (loading) return <p>Loading...</p>;
@@ -59,7 +71,8 @@ const ActualiteForm: React.FC<ActualiteFormProps> = ({
       </div>
       <div>
         <label>Image</label>
-        <input {...register('image')} required />
+        <input type="file" accept="image/*" onChange={handleFileChange} />
+        {imagePreview && <img src={imagePreview} alt="Aperçu" style={{ width: '150px', marginTop: '10px' }} />}
       </div>
       <button type="submit">Envoyer</button>
     </form>

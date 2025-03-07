@@ -22,34 +22,24 @@ const AdminActualites = () => {
     setIsEditing(true); // Activer le mode édition
   };
 
-  const handleSubmitForm = async (data: { titre: string; texte_long: string; resume: string; image: string }) => {
-    console.log(actualiteId);
-    if (isEditing && actualiteId) {
-      // Mettre à jour une actualité
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/actualites/${actualiteId}`, {
-        method: 'PUT',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-      });
-      if (response.ok) {
-        alert('Actualité mise à jour');
-      } else {
-        alert('Erreur lors de la mise à jour de l\'actualité');
-      }
-    } else if (isAdding) {
-      // Créer une nouvelle actualité
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/actualites`, {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-      });
-      if (response.ok) {
-        alert('Actualité créée');
-      } else {
-        alert('Erreur lors de la création de l\'actualité');
-      }
+  const handleSubmitForm = async (formData: FormData) => {
+    const method = isEditing && actualiteId ? 'PUT' : 'POST';
+    const url = isEditing && actualiteId
+      ? `${import.meta.env.VITE_API_URL}/actualites/${actualiteId}`
+      : `${import.meta.env.VITE_API_URL}/actualites`;
+  
+    const response = await fetch(url, {
+      method,
+      body: formData,
+      headers: { 'Authorization': `Bearer ${token}` }, // Pas de 'Content-Type', FormData le gère
+    });
+  
+    if (response.ok) {
+      alert(isEditing ? 'Actualité mise à jour' : 'Actualité créée');
+    } else {
+      alert('Erreur lors de l\'envoi des données');
     }
-  };
+  };  
 
   return (
     <div className="admin-page">
