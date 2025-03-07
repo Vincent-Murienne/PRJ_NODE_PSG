@@ -11,7 +11,12 @@ interface ActualiteProps {
 }
 
 const Actualite: React.FC<ActualiteProps> = ({ titre, image, texte_long, date, resume }) => {
-  const imageUrl = image.startsWith("http") ? image : `${apiURL}${image}`;
+  const imageUrl = image.startsWith("http") 
+    ? image 
+    : image.startsWith("/api/uploads") 
+      ? image 
+      : `/api/uploads/${image.split('/').pop()}`;
+      
   return (
     <div className="actualite">
       <img src={imageUrl} alt={titre} className="actualite-image" />

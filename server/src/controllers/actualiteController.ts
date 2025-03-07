@@ -11,7 +11,7 @@ const currentDate = new Date().toISOString().split('T')[0];
 // Récupérer toutes les actualités
 export const getAllActualites = async (req: Request, res: Response): Promise<void> => {
     try {
-        const [actualites] = await db.query<RowDataPacket[]>('SELECT * FROM actualite');
+        const [actualites] = await db.query<RowDataPacket[]>('SELECT * FROM actualite ORDER BY date DESC');
         res.status(200).json(actualites);
     } catch (error) {
         console.error(error);

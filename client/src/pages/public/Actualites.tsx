@@ -26,7 +26,9 @@ const Actualites: React.FC = () => {
     
         const formattedData = data.map((actualite: Actualite) => ({
           ...actualite,
-          image: actualite.image.startsWith("http") ? actualite.image : `${apiURL}${actualite.image}`
+          image: actualite.image.startsWith("http") 
+          ? actualite.image 
+          : `/api/uploads/${actualite.image.split('/').pop()}`
         }));
     
         setActualites(formattedData);
