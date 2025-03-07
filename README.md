@@ -67,6 +67,29 @@ Dans le dossier mobile
 flutter run
 ```
 
+## Configuration ADB pour éviter l'erreur de connexion
+
+Lors du démarrage de l'application mobile, une erreur de connexion peut survenir. Voici comment la résoudre :
+1. Aller dans le répertoire suivant :
+   
+```sql
+C:\Users\<nomDuUser>\AppData\Local\Android\Sdk\platform-tools
+```
+2. Ajouter ce chemin aux variables d'environnement :
+
+- Ouvrir les paramètres système avancés.
+
+- Aller dans Variables d'environnement.
+
+- Dans Variables système, modifier la variable Path.
+
+- Ajouter le chemin ci-dessus.
+
+3. Ouvrir un terminal et exécuter la commande suivante :
+```sql
+adb reverse tcp:8080 tcp:8080
+```
+
 ## Étapes à suivre pour la gestion des comptes
 
 Avoir un compte Administrateur :
