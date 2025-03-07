@@ -1,7 +1,5 @@
 import React from 'react';
 
-const apiURL = import.meta.env.VITE_API_URL;
-
 interface ActualiteProps {
   titre: string;
   image: string;
