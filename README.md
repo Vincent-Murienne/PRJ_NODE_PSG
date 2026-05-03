@@ -17,15 +17,38 @@ docker-compose up -d
 
 ### Accéder au conteneur SQL
 
-- (si terminal powershell) Rentrer dans le containeur mysql :
-```bash
-docker exec -it prj_node_psg-sql-1 mysql -u root -p
-```
+- (si terminal powershell)
+   Rentrer dans le containeur mysql :
+   ```bash
+   docker exec -it prj_node_psg-sql-1 mysql -u root -p
+   ```
 
-   puis :
+   puis dans le containeur :
    ```bash
    USE prj_node_psg;
    SHOW TABLES;
+   ```
+   
+  Rentrer dans le containeur client :
+   ```bash
+   docker exec -it prj_node_psg-client-1 bash
+   ```
+
+  puis dans le containeur :
+   ```bash
+   cd app
+   npm run dev
+   ```
+
+  Rentrer dans le containeur server :
+   ```bash
+   docker exec -it prj_node_psg-server-1 bash
+   ```
+
+  puis dans le containeur :
+   ```bash
+   cd app
+   npm start
    ```
 
 sinon :
